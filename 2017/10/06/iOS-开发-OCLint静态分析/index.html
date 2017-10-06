@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="静态分析," />
 
 
 
@@ -69,17 +69,20 @@
 
 
 
-<meta name="description" content="这是我的第一篇博客">
+<meta name="description" content="OCLint是一个强大的静态代码分析工具，可以用来提高代码质量，查找潜在的bug，主要针对 C、C++和Objective-C的静态分析。 OCLint可以发现这些问题可能的bug - 空的 if / else / try / catch / finally 语句 未使用的代码 - 未使用的局部变量和参数 复杂的代码 - 高圈复杂度, NPath复杂, 高NCSS 冗余代码 - 多余的if语句和无">
+<meta name="keywords" content="静态分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="postName">
-<meta property="og:url" content="http://yoursite.com/2017/09/30/postName/index.html">
+<meta property="og:title" content="iOS 开发 OCLint静态分析">
+<meta property="og:url" content="http://yoursite.com/2017/10/06/iOS-开发-OCLint静态分析/index.html">
 <meta property="og:site_name" content="玮杭の博客">
-<meta property="og:description" content="这是我的第一篇博客">
+<meta property="og:description" content="OCLint是一个强大的静态代码分析工具，可以用来提高代码质量，查找潜在的bug，主要针对 C、C++和Objective-C的静态分析。 OCLint可以发现这些问题可能的bug - 空的 if / else / try / catch / finally 语句 未使用的代码 - 未使用的局部变量和参数 复杂的代码 - 高圈复杂度, NPath复杂, 高NCSS 冗余代码 - 多余的if语句和无">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-30T10:21:04.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1914840-c1d183cf9e9ca0eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-10-06T12:03:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="postName">
-<meta name="twitter:description" content="这是我的第一篇博客">
+<meta name="twitter:title" content="iOS 开发 OCLint静态分析">
+<meta name="twitter:description" content="OCLint是一个强大的静态代码分析工具，可以用来提高代码质量，查找潜在的bug，主要针对 C、C++和Objective-C的静态分析。 OCLint可以发现这些问题可能的bug - 空的 if / else / try / catch / finally 语句 未使用的代码 - 未使用的局部变量和参数 复杂的代码 - 高圈复杂度, NPath复杂, 高NCSS 冗余代码 - 多余的if语句和无">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1914840-c1d183cf9e9ca0eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -109,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/30/postName/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/06/iOS-开发-OCLint静态分析/"/>
 
 
 
 
 
-  <title>postName | 玮杭の博客</title>
+  <title>iOS 开发 OCLint静态分析 | 玮杭の博客</title>
   
 
 
@@ -254,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/30/postName/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/iOS-开发-OCLint静态分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Carl_chen">
@@ -271,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">postName</h1>
+          <h1 class="post-title" itemprop="name headline">iOS 开发 OCLint静态分析</h1>
         
 
         <div class="post-meta">
@@ -283,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-30T18:15:02+08:00">
-                2017-09-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T19:36:34+08:00">
+                2017-10-06
               </time>
             
 
@@ -293,6 +296,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/优化/" itemprop="url" rel="index">
+                    <span itemprop="name">优化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -315,7 +340,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  9
+                  418
                 </span>
               
 
@@ -331,7 +356,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -352,7 +377,34 @@
       
 
       
-        <h2 id="这是我的第一篇博客"><a href="#这是我的第一篇博客" class="headerlink" title="这是我的第一篇博客"></a>这是我的第一篇博客</h2>
+        <p>OCLint是一个强大的静态代码分析工具，可以用来提高代码质量，查找潜在的bug，主要针对 C、C++和Objective-C的静态分析。</p>
+<h3 id="OCLint可以发现这些问题"><a href="#OCLint可以发现这些问题" class="headerlink" title="OCLint可以发现这些问题"></a>OCLint可以发现这些问题</h3><p>可能的bug - 空的 if / else / try / catch / finally 语句</p>
+<p>未使用的代码 - 未使用的局部变量和参数</p>
+<p>复杂的代码 - 高圈复杂度, NPath复杂, 高NCSS</p>
+<p>冗余代码 - 多余的if语句和无用的括号</p>
+<p>长方法和参数列表不好的实践——倒逻辑和参数重新分配</p>
+<p>静态代码分析是一个来检测对于编译不可见的关键技术。<a id="more"></a></p>
+<h3 id="安装xcpretty"><a href="#安装xcpretty" class="headerlink" title="安装xcpretty"></a>安装xcpretty</h3><blockquote>
+<p>// 安装OCLint </p>
+<p>brew tap oclint/formulae</p>
+<p>brew install oclint</p>
+<p>// 安装xcpretty</p>
+<p>gem install xcpretty</p>
+</blockquote>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><blockquote>
+<p>brew update</p>
+<p>brew upgrade oclint</p>
+</blockquote>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在终端进入项目目录，然后替换workspace的名字和scheme的名字，将修改好的命令粘贴到终端执行，等待命令执行完毕</p>
+<blockquote>
+<p>myworkspace=haha.xcworkspace # 替换workspace的名字<br>myscheme=haha # 替换scheme的名字<br>xcodebuild -workspace $myworkspace -scheme $myscheme clean&amp;&amp;<br>xcodebuild -workspace $myworkspace -scheme $myscheme \<br>-configuration Debug \<br>| xcpretty -r json-compilation-database -o compile_commands.json&amp;&amp;<br>oclint-json-compilation-database -e Pods – \<br>-report-type html -o oclint_result.html \<br>-rc LONG_LINE=200 \<br>-max-priority-1=100000 \<br>-max-priority-2=100000 \<br>-max-priority-3=100000; \<br>rm compile_commands.json;<br>if [ -f ./oclint_result.html ]; then echo ‘—–分析完毕—–’<br>else echo “—–分析失败—–”; fi</p>
+</blockquote>
+<p>待出现—–分析完毕—–字样，打开项目目录即可看到oclint_result.html 文件</p>
+<h3 id="查看分析文件"><a href="#查看分析文件" class="headerlink" title="查看分析文件"></a>查看分析文件</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-c1d183cf9e9ca0eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-10-06 下午7.41.20.png"></p>
+<p>根据以下文档中文说明，找到Rule Name对应的类型说明以及file和Location，到对应的源文件修改错误。<br><a href="http://www.jianshu.com/p/35cf99c07eaa" target="_blank" rel="external">OCLint官方规则文档中文说明</a></p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="http://www.jianshu.com/p/4f505e92d557" target="_blank" rel="external">iOS使用OCLint做静态代码分析</a></p>
+<p><a href="http://www.jianshu.com/p/35cf99c07eaa" target="_blank" rel="external">OCLint官方规则文档中文说明</a></p>
+
       
     </div>
     
@@ -393,6 +445,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/静态分析/" rel="tag"># 静态分析</a>
+          
+        </div>
+      
 
       
       
@@ -402,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/30/hello-world/" rel="next" title="Hexo 相关操作命令">
-                <i class="fa fa-chevron-left"></i> Hexo 相关操作命令
+              <a href="/2017/10/06/iOS开发-Xcode-Analyze分析/" rel="next" title="iOS开发 Xcode Analyze分析">
+                <i class="fa fa-chevron-left"></i> iOS开发 Xcode Analyze分析
               </a>
             
           </div>
@@ -411,10 +469,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/03/iOS开发-Jenkins-fir教程/" rel="prev" title="iOS开发 Jenkins+fir教程">
-                iOS开发 Jenkins+fir教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -553,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是我的第一篇博客"><span class="nav-number">1.</span> <span class="nav-text">这是我的第一篇博客</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OCLint可以发现这些问题"><span class="nav-number">1.</span> <span class="nav-text">OCLint可以发现这些问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装xcpretty"><span class="nav-number">2.</span> <span class="nav-text">安装xcpretty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新"><span class="nav-number">3.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">4.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看分析文件"><span class="nav-number">5.</span> <span class="nav-text">查看分析文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
 
           </div>
