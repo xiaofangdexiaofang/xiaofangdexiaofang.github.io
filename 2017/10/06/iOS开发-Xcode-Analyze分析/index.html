@@ -69,22 +69,22 @@
 
 
 
-<meta name="description" content="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。1.Dead store  删除对应的无效代码即可">
+<meta name="description" content="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。">
 <meta name="keywords" content="静态分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发 Xcode Analyze分析">
 <meta property="og:url" content="http://yoursite.com/2017/10/06/iOS开发-Xcode-Analyze分析/index.html">
 <meta property="og:site_name" content="玮杭の博客">
-<meta property="og:description" content="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。1.Dead store  删除对应的无效代码即可">
+<meta property="og:description" content="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1914840-ba7e73de78d2011a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1914840-9fda8d9245c609d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1914840-5cd7fdcee407f3cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1914840-39bfe138ccf980b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-06T09:58:19.000Z">
+<meta property="og:updated_time" content="2017-10-06T10:00:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发 Xcode Analyze分析">
-<meta name="twitter:description" content="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。1.Dead store  删除对应的无效代码即可">
+<meta name="twitter:description" content="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1914840-ba7e73de78d2011a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -380,9 +380,9 @@
       
 
       
-        <h2 id="Xcode-Analyze-是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C-和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。"><a href="#Xcode-Analyze-是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C-和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。" class="headerlink" title="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。"></a>Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。</h2><h3 id="1-Dead-store"><a href="#1-Dead-store" class="headerlink" title="1.Dead store"></a>1.Dead store</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-ba7e73de78d2011a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-19 上午11.27.54.png"></p>
+        <h2 id="Xcode-Analyze-是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C-和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。"><a href="#Xcode-Analyze-是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C-和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。" class="headerlink" title="Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。"></a>Xcode Analyze 是直接集成在Xcode中的静态代码分析工具，专门用于针对C，C++和Objective-C的程序进行分析。已经被Xcode集成，可以直接使用Xcode进行静态代码扫描分析，Clang默认的配置主要是空指针检测，类型转换检测，空判断检测，内存泄漏检测这种等问题，使用方便。<a id="more"></a></h2><h3 id="1-Dead-store"><a href="#1-Dead-store" class="headerlink" title="1.Dead store"></a>1.Dead store</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-ba7e73de78d2011a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-19 上午11.27.54.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1914840-9fda8d9245c609d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-19 上午11.26.50.png"></p>
-<p>删除对应的无效代码即可<a id="more"></a></p>
+<p>删除对应的无效代码即可</p>
 <h3 id="2-Logic-error"><a href="#2-Logic-error" class="headerlink" title="2.Logic error"></a>2.Logic error</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-5cd7fdcee407f3cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-19 上午11.37.15.png"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1914840-39bfe138ccf980b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-19 上午11.38.14.png"></p>
 <p>修改对应的逻辑</p>
