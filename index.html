@@ -374,43 +374,17 @@
 
       
         
-          
-            <h2 id="记录安装问题和解决办法，防止再次踩坑"><a href="#记录安装问题和解决办法，防止再次踩坑" class="headerlink" title="记录安装问题和解决办法，防止再次踩坑"></a>记录安装问题和解决办法，防止再次踩坑</h2><h3 id="由于Jenkins是基于java开发，首先要安装SDK（https-java-com-zh-CN-）"><a href="#由于Jenkins是基于java开发，首先要安装SDK（https-java-com-zh-CN-）" class="headerlink" title="由于Jenkins是基于java开发，首先要安装SDK（https://java.com/zh_CN/）"></a>由于Jenkins是基于java开发，首先要安装SDK（<a href="https://java.com/zh_CN/" target="_blank" rel="external">https://java.com/zh_CN/</a>）</h3><h3 id="安装Jenkins"><a href="#安装Jenkins" class="headerlink" title="安装Jenkins"></a>安装Jenkins</h3><h4 id="直接下载安装（http-jenkins-ci-org-）"><a href="#直接下载安装（http-jenkins-ci-org-）" class="headerlink" title="直接下载安装（http://jenkins-ci.org/）"></a>直接下载安装（<a href="http://jenkins-ci.org/" target="_blank" rel="external">http://jenkins-ci.org/</a>）</h4><h4 id="使用命令行安装，前提是你已经安装homebrew"><a href="#使用命令行安装，前提是你已经安装homebrew" class="headerlink" title="使用命令行安装，前提是你已经安装homebrew"></a>使用命令行安装，前提是你已经安装homebrew</h4><blockquote>
+          <h2 id="记录安装问题和解决办法，防止再次踩坑"><a href="#记录安装问题和解决办法，防止再次踩坑" class="headerlink" title="记录安装问题和解决办法，防止再次踩坑"></a>记录安装问题和解决办法，防止再次踩坑</h2><h3 id="由于Jenkins是基于java开发，首先要安装SDK（https-java-com-zh-CN-）"><a href="#由于Jenkins是基于java开发，首先要安装SDK（https-java-com-zh-CN-）" class="headerlink" title="由于Jenkins是基于java开发，首先要安装SDK（https://java.com/zh_CN/）"></a>由于Jenkins是基于java开发，首先要安装SDK（<a href="https://java.com/zh_CN/" target="_blank" rel="external">https://java.com/zh_CN/</a>）</h3><h3 id="安装Jenkins"><a href="#安装Jenkins" class="headerlink" title="安装Jenkins"></a>安装Jenkins</h3><h4 id="直接下载安装（http-jenkins-ci-org-）"><a href="#直接下载安装（http-jenkins-ci-org-）" class="headerlink" title="直接下载安装（http://jenkins-ci.org/）"></a>直接下载安装（<a href="http://jenkins-ci.org/" target="_blank" rel="external">http://jenkins-ci.org/</a>）</h4><h4 id="使用命令行安装，前提是你已经安装homebrew"><a href="#使用命令行安装，前提是你已经安装homebrew" class="headerlink" title="使用命令行安装，前提是你已经安装homebrew"></a>使用命令行安装，前提是你已经安装homebrew</h4><blockquote>
 <p>brew install jenkins</p>
 </blockquote>
-<h4 id="安装完成，你会看到这句话：-please-use-the-following-password-to-proceed-to-installation-记住下面的密码"><a href="#安装完成，你会看到这句话：-please-use-the-following-password-to-proceed-to-installation-记住下面的密码" class="headerlink" title="安装完成，你会看到这句话： please use the following password to proceed to installation:记住下面的密码"></a>安装完成，你会看到这句话： please use the following password to proceed to installation:记住下面的密码</h4><h3 id="打开Jenkins网页（-http-localhost-8080"><a href="#打开Jenkins网页（-http-localhost-8080" class="headerlink" title="打开Jenkins网页（[http://localhost:8080/]"></a>打开Jenkins网页（[<a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a>]</h3><p>你会看到下面这个界面，输入刚才保存的密码。若是直接下载安装的，请自行百度搜索如何找到密码。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-9cd87b6873ae5eb3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1194012-c8468fd91737f725.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-3f7fe25920838013.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1194012-cd9979b853d14ac6.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-c6a17e89e27c5cce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1194012-56431c2d22013dcd.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-f8c9d5bfe7058d30.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1194012-578857333787630a.png"></p>
-<p>看到下面直接输入用户名和密码以及邮件<br><img src="http://upload-images.jianshu.io/upload_images/1914840-56d2d6fb60d31ad2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1194012-7ac78a54760114dd.png.jpeg"></p>
-<h3 id="安装GitLab插件"><a href="#安装GitLab插件" class="headerlink" title="安装GitLab插件"></a>安装GitLab插件</h3><p>因为我们用的是GitLab来管理源代码，Jenkins本身并没有自带GitLab插件，所以我们需要依次选择 系统管理-&gt;管理插件，在“可选插件”中选中“GitLab Plugin”和“Gitlab Hook Plugin”这两项，然后安装。</p>
-<h3 id="安装Xcode插件"><a href="#安装Xcode插件" class="headerlink" title="安装Xcode插件"></a>安装Xcode插件</h3><p>同安装GitLab插件的步骤一样，我们依次选择系统管理-&gt;管理插件，在“可选插件”中选中“Xcode integration”安装。</p>
-<h3 id="安装fir-im插件-系统设置-gt-管理插件-gt-高级-上传fir-im的插件"><a href="#安装fir-im插件-系统设置-gt-管理插件-gt-高级-上传fir-im的插件" class="headerlink" title="安装fir.im插件 系统设置-&gt;管理插件-&gt;高级 上传fir.im的插件"></a>安装fir.im插件 系统设置-&gt;管理插件-&gt;高级 上传fir.im的插件</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-be0a5cf572892859.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E4754FFDC2D05F8B12250FA165B82517.png"></p>
-<p>###创建一个新的任务 -&gt;构建一个自由风格的软件项目</p>
-<p>配置项目的相关参数</p>
-<p>General<br><img src="http://upload-images.jianshu.io/upload_images/1914840-5a0b06667f4c28a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0763BD9BBE14C8968238FF2663A374D8.png"></p>
-<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-1ff7f86444f5ec99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="08022B69BDCEBE57761CB88CFFF175A1.png"></p>
-<h3 id="点击Add，添加对应的用户名和密码"><a href="#点击Add，添加对应的用户名和密码" class="headerlink" title="点击Add，添加对应的用户名和密码"></a>点击Add，添加对应的用户名和密码</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-717782062b09a817.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="207F200D8B72272761DDDB7D413AE6E2.png"></p>
-<h3 id="添加构建时间"><a href="#添加构建时间" class="headerlink" title="添加构建时间"></a>添加构建时间</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-8e790bad59752603.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ADA860BE9BD269D2478361AD09784D61.png"></p>
-<h3 id="构建方式我这边选择的是XOCDE"><a href="#构建方式我这边选择的是XOCDE" class="headerlink" title="构建方式我这边选择的是XOCDE"></a>构建方式我这边选择的是XOCDE</h3><p><img src="http://upload-images.jianshu.io/upload_images/1914840-935cb94f38bbee4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-18 下午4.39.51.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-c9e25f029616870a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-18 下午4.40.01.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-6c5a863704903719.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-18 下午4.40.27.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-96fd17bc7c9aced3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-18 下午4.40.14.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-34303d1e1dd921e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-08-18 下午4.40.27.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1914840-0b6f05acb6fdc80a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="71A7B5BEBE4025E88870ECF9A2C41C14.png"></p>
-<p><em>*</em>之前由于Development Team ID 和 Xcode workSpace的填写不正确 导致构建失败</p>
-<p><em>*</em>构建后操作 选择Upload fir.im 填写相关信息</p>
-<p><em>*</em>然后添加邮件通知即可</p>
-<p><em>*</em>我这边还出现这样一个问题，就是当我关机再次打开jenkins界面的时，首先出现的不是jenkins的管理界面而是（welcome to nignx界面，然后再次刷新当前页面即可）</p>
-<h3 id="参考文章如下"><a href="#参考文章如下" class="headerlink" title="参考文章如下"></a>参考文章如下</h3><p>iOS使用Jenkins+Xcode+fir 搭建持续集成环境（<a href="http://www.jianshu.com/p/13e34671788f）" target="_blank" rel="external">http://www.jianshu.com/p/13e34671788f）</a></p>
-<p>iOS 开发使用 Jenkins 搭建 CI 服务器<br>（<a href="http://www.jianshu.com/p/1634668d4a86）" target="_blank" rel="external">http://www.jianshu.com/p/1634668d4a86）</a></p>
-<p>fir.im Jenkins 插件使用方法<br>（<a href="http://www.jianshu.com/p/9a245918a219）" target="_blank" rel="external">http://www.jianshu.com/p/9a245918a219）</a></p>
-<p> <a href="http://blog.csdn.net/dreamtl/article/details/51841111" target="_blank" rel="external">Jenkins 中如何手工来添加插件呢</a></p>
-<p>手把手教你, Jenkins构建iOS项目<br>（<a href="https://my.oschina.net/roycehe/blog/796698）" target="_blank" rel="external">https://my.oschina.net/roycehe/blog/796698）</a></p>
-<p>Jenkins(iOS Android)自动化打包实现可持续集成+上传蒲公英<br>（<a href="http://www.jianshu.com/p/e8cf802a1c81?utm_medium=referral）" target="_blank" rel="external">http://www.jianshu.com/p/e8cf802a1c81?utm_medium=referral）</a></p>
-
-          
+<h4 id="安装完成，你会看到这句话：-please-use-the-following-password-to-proceed-to-installation-记住下面的密码"><a href="#安装完成，你会看到这句话：-please-use-the-following-password-to-proceed-to-installation-记住下面的密码" class="headerlink" title="安装完成，你会看到这句话： please use the following password to proceed to installation:记住下面的密码"></a>安装完成，你会看到这句话： please use the following password to proceed to installation:记住下面的密码</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/03/iOS开发-Jenkins-fir教程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
