@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="玮杭の博客">
 <meta property="og:description" content="APP的内存分类1.Leaked memory: Memory unreferenced by your application that cannot be used again or freed (also detectable by using the Leaks instrument).  2.Abandoned memory: Memory still referenced by you">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-06T13:48:11.000Z">
+<meta property="og:updated_time" content="2017-10-07T02:23:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 开发 内存泄漏">
 <meta name="twitter:description" content="APP的内存分类1.Leaked memory: Memory unreferenced by your application that cannot be used again or freed (also detectable by using the Leaks instrument).  2.Abandoned memory: Memory still referenced by you">
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  546
+                  565
                 </span>
               
 
@@ -400,16 +400,17 @@
 <p>[weakSelf doSomething];</p>
 <p>}];</p>
 </blockquote>
-<h4 id="NSNotification"><a href="#NSNotification" class="headerlink" title="NSNotification"></a>NSNotification</h4><p>在dealloc里面添加remove</p>
-<h4 id="其他内存问题"><a href="#其他内存问题" class="headerlink" title="其他内存问题"></a>其他内存问题</h4><p>1 target action 机制</p>
+<h3 id="NSNotification"><a href="#NSNotification" class="headerlink" title="NSNotification"></a>NSNotification</h3><p>在dealloc里面添加remove</p>
+<h3 id="其他内存问题"><a href="#其他内存问题" class="headerlink" title="其他内存问题"></a>其他内存问题</h3><p>1 target action 机制</p>
 <p>2 动画的repeat count无限大，而且也不主动停止动画，基本就等于无限循环了;</p>
 <p>3 forwardingTargetForSelector返回了self。</p>
-<h4 id="内存检查办法"><a href="#内存检查办法" class="headerlink" title="内存检查办法"></a>内存检查办法</h4><p>1 通过Instruments来查看leaks</p>
+<h3 id="内存检查办法"><a href="#内存检查办法" class="headerlink" title="内存检查办法"></a>内存检查办法</h3><p>1 通过Instruments来查看leaks</p>
 <p>2 集成Facebook开源的<a href="https://github.com/facebook/FBRetainCycleDetector" target="_blank" rel="external">FBRetainCycleDetector</a></p>
 <p>3 集成<a href="https://github.com/Tencent/MLeaksFinder" target="_blank" rel="external">MLeaksFinder</a></p>
-<h4 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h4><p>通过leaks能检测很多地方的内存泄漏，但是不直观，需要自己分析。很多项目里集成的三方库都存在内存泄漏问题，要么修改泄漏，要么自己写一个，或者换一个都行</p>
+<h3 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h3><p>通过leaks能检测很多地方的内存泄漏，但是不直观，需要自己分析。很多项目里集成的三方库都存在内存泄漏问题，要么修改泄漏，要么自己写一个，或者换一个都行。（后续会出此教程）</p>
 <p>FBRetainCycleDetector需要自己添加对应的代码，在你觉得可能会出现内存泄漏的地方</p>
 <p>MLeaksFinder 只需要集成即可，无需添加代码，运行项目，当有内存泄漏时，会跳出弹框提醒，但是只能检测view和viewController的内存泄漏。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://juejin.im/post/58ca0832a22b9d006418fe43" target="_blank" rel="external">iOS App 稳定性指标及监测</a></p>
 
       
     </div>
@@ -613,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#APP的内存分类"><span class="nav-number">1.</span> <span class="nav-text">APP的内存分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS中主要的内存问题，有以下三点"><span class="nav-number">2.</span> <span class="nav-text">iOS中主要的内存问题，有以下三点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#core-Foundation"><span class="nav-number">3.</span> <span class="nav-text">core Foundation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环引用"><span class="nav-number">4.</span> <span class="nav-text">循环引用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Delegate"><span class="nav-number">4.1.</span> <span class="nav-text">Delegate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSTimer"><span class="nav-number">4.2.</span> <span class="nav-text">NSTimer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Block"><span class="nav-number">4.3.</span> <span class="nav-text">Block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSNotification"><span class="nav-number">4.4.</span> <span class="nav-text">NSNotification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他内存问题"><span class="nav-number">4.5.</span> <span class="nav-text">其他内存问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存检查办法"><span class="nav-number">4.6.</span> <span class="nav-text">内存检查办法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用心得"><span class="nav-number">4.7.</span> <span class="nav-text">使用心得</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#APP的内存分类"><span class="nav-number">1.</span> <span class="nav-text">APP的内存分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS中主要的内存问题，有以下三点"><span class="nav-number">2.</span> <span class="nav-text">iOS中主要的内存问题，有以下三点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#core-Foundation"><span class="nav-number">3.</span> <span class="nav-text">core Foundation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环引用"><span class="nav-number">4.</span> <span class="nav-text">循环引用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Delegate"><span class="nav-number">4.1.</span> <span class="nav-text">Delegate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSTimer"><span class="nav-number">4.2.</span> <span class="nav-text">NSTimer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Block"><span class="nav-number">4.3.</span> <span class="nav-text">Block</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSNotification"><span class="nav-number">5.</span> <span class="nav-text">NSNotification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他内存问题"><span class="nav-number">6.</span> <span class="nav-text">其他内存问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存检查办法"><span class="nav-number">7.</span> <span class="nav-text">内存检查办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用心得"><span class="nav-number">8.</span> <span class="nav-text">使用心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
