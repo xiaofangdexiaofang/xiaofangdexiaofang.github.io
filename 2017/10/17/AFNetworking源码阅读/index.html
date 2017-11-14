@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="玮杭の博客">
 <meta property="og:description" content="AFNetworking的源码阅读 AF主要分为5个功能模块：  网络通信模块（AFURLSessionManager,AFHTTPSessionManager）  网络状态监听模块（Reachablity）  网络通信安全策略模块（Security）  序列化和发序列化模块（Serialization）  UIKit的扩展   其中AFHTTPSessionManager是继承于AFURLSes">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-14T09:00:09.000Z">
+<meta property="og:updated_time" content="2017-11-14T09:03:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AFNetworking源码阅读">
 <meta name="twitter:description" content="AFNetworking的源码阅读 AF主要分为5个功能模块：  网络通信模块（AFURLSessionManager,AFHTTPSessionManager）  网络状态监听模块（Reachablity）  网络通信安全策略模块（Security）  序列化和发序列化模块（Serialization）  UIKit的扩展   其中AFHTTPSessionManager是继承于AFURLSes">
@@ -389,7 +389,7 @@
 <li><p>UIKit的扩展</p>
 </li>
 </ul>
-<p>其中AFHTTPSessionManager是继承于AFURLSessionManager的，我们一般做网络请求都是用这个类，但是它本身是没有做实事的，只是做了一些简单的封装，把请求逻辑分发给父类AFURLSessionManager或者其它类去做。</p>
+<p>其中AFHTTPSessionManager是继承于AFURLSessionManager的，我们一般做网络请求都是用这个类，但是它本身是没有做实事的，只是做了一些简单的封装，把请求逻辑分发给父类AFURLSessionManager或者其它类去做。<a id="more"></a></p>
 <h3 id="NSURLSession"><a href="#NSURLSession" class="headerlink" title="NSURLSession"></a>NSURLSession</h3><p>使用 NSURLSession 来进行 HTTP 请求并且获得数据总共有五个步骤：</p>
 <p>1.实例化一个 NSURLRequest/NSMutableURLRequest，设置 URL</p>
 <p>2.通过 - sharedSession 方法获取 NSURLSession</p>
