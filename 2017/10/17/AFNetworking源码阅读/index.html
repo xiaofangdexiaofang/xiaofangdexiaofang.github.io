@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="玮杭の博客">
 <meta property="og:description" content="AFNetworking的源码阅读 AF主要分为5个功能模块：  网络通信模块（AFURLSessionManager,AFHTTPSessionManager）  网络状态监听模块（Reachablity）  网络通信安全策略模块（Security）  序列化和发序列化模块（Serialization）  UIKit的扩展   其中AFHTTPSessionManager是继承于AFURLSes">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-14T08:52:24.000Z">
+<meta property="og:updated_time" content="2017-11-14T09:00:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AFNetworking源码阅读">
 <meta name="twitter:description" content="AFNetworking的源码阅读 AF主要分为5个功能模块：  网络通信模块（AFURLSessionManager,AFHTTPSessionManager）  网络状态监听模块（Reachablity）  网络通信安全策略模块（Security）  序列化和发序列化模块（Serialization）  UIKit的扩展   其中AFHTTPSessionManager是继承于AFURLSes">
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  661
+                  664
                 </span>
               
 
@@ -423,6 +423,7 @@
 <p>2.调用 startMonitoring 方法开始对网络状态进行监控</p>
 <p>3.设置 networkReachabilityStatusBlock 在每次网络状态改变时, 调用这个 block</p>
 <h3 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h3><p>AFSecurityPolicy 主要作用就是验证 HTTPS 请求的证书是否有效，如果 app 中有一些敏感信息或者涉及交易信息，一定要使用 HTTPS 来保证交易或者用户信息的安全。</p>
+<p>参考：<br><a href="https://draveness.me/afnetworking5" target="_blank" rel="external">Draveness</a></p>
 
       
     </div>
