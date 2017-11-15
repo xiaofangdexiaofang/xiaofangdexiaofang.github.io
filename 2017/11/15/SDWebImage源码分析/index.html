@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="动画," />
+  <meta name="keywords" content="SDWebImage," />
 
 
 
@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="iOS开发 动画篇 主要分为以下四类：UIView动画，核心动画，帧动画，自定义转场动画。 UIView能够设置的动画属性：frame,bounds,center,transform,alpha,backgroundColor,contenttStretch UIView是CALayer的封装，图层不能处理触摸事件，但是能达到视图不能做的事 图层动画的本质就是将图层内部的内容转化为位图经硬件操作形">
-<meta name="keywords" content="动画">
+<meta name="description" content="SDWebImage的源码分析 NSData+ImageContentType.h通过image data 判断当前图片的格式">
+<meta name="keywords" content="SDWebImage">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发 动画">
-<meta property="og:url" content="http://yoursite.com/2017/10/27/iOS开发-动画/index.html">
+<meta property="og:title" content="SDWebImage源码分析">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/SDWebImage源码分析/index.html">
 <meta property="og:site_name" content="玮杭の博客">
-<meta property="og:description" content="iOS开发 动画篇 主要分为以下四类：UIView动画，核心动画，帧动画，自定义转场动画。 UIView能够设置的动画属性：frame,bounds,center,transform,alpha,backgroundColor,contenttStretch UIView是CALayer的封装，图层不能处理触摸事件，但是能达到视图不能做的事 图层动画的本质就是将图层内部的内容转化为位图经硬件操作形">
+<meta property="og:description" content="SDWebImage的源码分析 NSData+ImageContentType.h通过image data 判断当前图片的格式">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-11T04:09:56.000Z">
+<meta property="og:updated_time" content="2017-11-15T06:22:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发 动画">
-<meta name="twitter:description" content="iOS开发 动画篇 主要分为以下四类：UIView动画，核心动画，帧动画，自定义转场动画。 UIView能够设置的动画属性：frame,bounds,center,transform,alpha,backgroundColor,contenttStretch UIView是CALayer的封装，图层不能处理触摸事件，但是能达到视图不能做的事 图层动画的本质就是将图层内部的内容转化为位图经硬件操作形">
+<meta name="twitter:title" content="SDWebImage源码分析">
+<meta name="twitter:description" content="SDWebImage的源码分析 NSData+ImageContentType.h通过image data 判断当前图片的格式">
 
 
 
@@ -110,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/27/iOS开发-动画/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/15/SDWebImage源码分析/"/>
 
 
 
 
 
-  <title>iOS开发 动画 | 玮杭の博客</title>
+  <title>SDWebImage源码分析 | 玮杭の博客</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/iOS开发-动画/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/SDWebImage源码分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Carl_chen">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS开发 动画</h1>
+          <h1 class="post-title" itemprop="name headline">SDWebImage源码分析</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T10:33:33+08:00">
-                2017-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T10:30:28+08:00">
+                2017-11-15
               </time>
             
 
@@ -307,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
                   </a>
                 </span>
 
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  360
+                  227
                 </span>
               
 
@@ -375,25 +375,20 @@
       
 
       
-        <p>iOS开发 动画篇</p>
-<p>主要分为以下四类：UIView动画，核心动画，帧动画，自定义转场动画。</p>
-<p>UIView能够设置的动画属性：frame,bounds,center,transform,alpha,backgroundColor,contenttStretch</p>
-<p>UIView是CALayer的封装，图层不能处理触摸事件，但是能达到视图不能做的事</p>
-<p>图层动画的本质就是将图层内部的内容转化为位图经硬件操作形成一种动画效果 <a id="more"></a></p>
-<ul>
-<li>阴影，圆角，带颜色的边框</li>
-<li>3D变换</li>
-<li>非矩形范围</li>
-<li>透明遮罩</li>
-<li>多级非线性动画</li>
-</ul>
-<p>iOS核心动画分为以下几类：</p>
-<p>CAAnimation：核心动画的基础类，不能直接使用，负责动画运行时间、速度的控制，本身实现了CAMediaTiming协议。</p>
-<p>CAPropertyAnimation：属性动画的基类（通过属性进行动画设置，注意是可动画属性），不能直接使用。</p>
-<p>CAAnimationGroup：动画组，动画组是一种组合模式设计，可以通过动画组来进行所有动画行为的统一控制，组中所有动画效果可以并发执行。</p>
-<p>CATransition：转场动画，主要通过滤镜进行动画效果设置。</p>
-<p>CABasicAnimation：基础动画，通过属性修改进行动画参数控制，只有初始状态和结束状态。</p>
-<p>CAKeyframeAnimation：关键帧动画，同样是通过属性进行动画参数控制，但是同基础动画不同的是它可以有多个状态控制。</p>
+        <p>SDWebImage的源码分析</p>
+<h3 id="NSData-ImageContentType-h"><a href="#NSData-ImageContentType-h" class="headerlink" title="NSData+ImageContentType.h"></a>NSData+ImageContentType.h</h3><p>通过image data 判断当前图片的格式 <a id="more"></a></p>
+<h3 id="SDImageCache"><a href="#SDImageCache" class="headerlink" title="SDImageCache"></a>SDImageCache</h3><p>此处为Disk+memory的缓存</p>
+<h3 id="SDWebImageCompat"><a href="#SDWebImageCompat" class="headerlink" title="SDWebImageCompat"></a>SDWebImageCompat</h3><p>此处是保证不同平台和版本，屏幕兼容性的宏定义和内联</p>
+<h3 id="SDwebImageDecoder"><a href="#SDwebImageDecoder" class="headerlink" title="SDwebImageDecoder"></a>SDwebImageDecoder</h3><p>图片解压缩，其中只有一个接口</p>
+<h3 id="SDWebImageDownloader"><a href="#SDWebImageDownloader" class="headerlink" title="SDWebImageDownloader"></a>SDWebImageDownloader</h3><p>异步图片下载管理：管理下载队列，管理operation，管理网络请求，处理结果和异常</p>
+<h3 id="SDWebImageDownloaderOperation"><a href="#SDWebImageDownloaderOperation" class="headerlink" title="SDWebImageDownloaderOperation"></a>SDWebImageDownloaderOperation</h3><p>实现异步下载图片的NSOperation，网络请求基于NSURLSession</p>
+<h3 id="SDWebImageManager"><a href="#SDWebImageManager" class="headerlink" title="SDWebImageManager"></a>SDWebImageManager</h3><p>核心管理器，对缓存管理+下载管理进行了封装</p>
+<h3 id="SDWebImageOpration"><a href="#SDWebImageOpration" class="headerlink" title="SDWebImageOpration"></a>SDWebImageOpration</h3><p>operation协议，只定义了cancel operation这一个接口</p>
+<h3 id="SDWebImagePrefecher"><a href="#SDWebImagePrefecher" class="headerlink" title="SDWebImagePrefecher"></a>SDWebImagePrefecher</h3><p>低优先级的情况下预先加载图片，对SDWebImageManager进行简单的封装</p>
+<h3 id="UIButton-WebCache"><a href="#UIButton-WebCache" class="headerlink" title="UIButton+WebCache"></a>UIButton+WebCache</h3><p>为button异步加载图片</p>
+<h3 id="UIImage-GIF-UIImage-MultiFormat"><a href="#UIImage-GIF-UIImage-MultiFormat" class="headerlink" title="UIImage+GIF/UIImage+MultiFormat/"></a>UIImage+GIF/UIImage+MultiFormat/</h3><p>将image data 转换成定制的格式图片</p>
+<h3 id="UIImageView-HighlightedWebCache-UIImageView-WebCache"><a href="#UIImageView-HighlightedWebCache-UIImageView-WebCache" class="headerlink" title="UIImageView (HighlightedWebCache)+UIImageView (WebCache)"></a>UIImageView (HighlightedWebCache)+UIImageView (WebCache)</h3><p>为UIImageView 异步加载图片</p>
+<h3 id="UIView-WebCacheOperation"><a href="#UIView-WebCacheOperation" class="headerlink" title="UIView (WebCacheOperation)"></a>UIView (WebCacheOperation)</h3><p>异步下载图片的operation</p>
 
       
     </div>
@@ -437,7 +432,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/动画/" rel="tag"># 动画</a>
+            <a href="/tags/SDWebImage/" rel="tag"># SDWebImage</a>
           
         </div>
       
@@ -450,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/18/GET和POST的区别/" rel="next" title="GET和POST的区别">
-                <i class="fa fa-chevron-left"></i> GET和POST的区别
+              <a href="/2017/10/27/iOS开发-动画/" rel="next" title="iOS开发 动画">
+                <i class="fa fa-chevron-left"></i> iOS开发 动画
               </a>
             
           </div>
@@ -459,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/15/SDWebImage源码分析/" rel="prev" title="SDWebImage源码分析">
-                SDWebImage源码分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,8 +507,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -582,6 +582,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSData-ImageContentType-h"><span class="nav-number">1.</span> <span class="nav-text">NSData+ImageContentType.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDImageCache"><span class="nav-number">2.</span> <span class="nav-text">SDImageCache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImageCompat"><span class="nav-number">3.</span> <span class="nav-text">SDWebImageCompat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDwebImageDecoder"><span class="nav-number">4.</span> <span class="nav-text">SDwebImageDecoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImageDownloader"><span class="nav-number">5.</span> <span class="nav-text">SDWebImageDownloader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImageDownloaderOperation"><span class="nav-number">6.</span> <span class="nav-text">SDWebImageDownloaderOperation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImageManager"><span class="nav-number">7.</span> <span class="nav-text">SDWebImageManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImageOpration"><span class="nav-number">8.</span> <span class="nav-text">SDWebImageOpration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImagePrefecher"><span class="nav-number">9.</span> <span class="nav-text">SDWebImagePrefecher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIButton-WebCache"><span class="nav-number">10.</span> <span class="nav-text">UIButton+WebCache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIImage-GIF-UIImage-MultiFormat"><span class="nav-number">11.</span> <span class="nav-text">UIImage+GIF/UIImage+MultiFormat/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIImageView-HighlightedWebCache-UIImageView-WebCache"><span class="nav-number">12.</span> <span class="nav-text">UIImageView (HighlightedWebCache)+UIImageView (WebCache)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView-WebCacheOperation"><span class="nav-number">13.</span> <span class="nav-text">UIView (WebCacheOperation)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
