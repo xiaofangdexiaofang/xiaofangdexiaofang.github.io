@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="玮杭の博客">
 <meta property="og:description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  适配导航栏的高度和底部Tabbar的距离，适配安全区域。  在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T03:02:13.000Z">
+<meta property="og:updated_time" content="2017-11-29T03:40:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iPhoneX和iOS 11的适配">
 <meta name="twitter:description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  适配导航栏的高度和底部Tabbar的距离，适配安全区域。  在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创">
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  268
+                  285
                 </span>
               
 
@@ -391,6 +391,7 @@
 </ol>
 <p>}</p>
 <p>3.在wkwebView的 - (void)webView:(WKWebView <em>)webView decidePolicyForNavigationAction:(WKNavigationAction </em>)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler 方法中执行到<br> decisionHandler(WKNavigationActionPolicyAllow) 的方法会崩溃。在iOS 11 之前是这种方法不会崩溃，崩溃的原因是decisionHandler(WKNavigationActionPolicyAllow) 代码调用多次，然后调整代码后，使其只调用一次。</p>
+<p>4.在Assets.xcassets中的LaunchImage中添加一个1125x2436像素的启动图。</p>
 <p>以上就是目前适配遇到的问题。 </p>
 
       
