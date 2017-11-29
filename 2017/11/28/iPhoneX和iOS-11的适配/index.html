@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  适配导航栏的高度和底部Tabbar的距离，适配安全区域。  在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创">
+<meta name="description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  1.适配导航栏的高度和底部Tabbar的距离，适配安全区域。  2.在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationControl">
 <meta name="keywords" content="适配">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iPhoneX和iOS 11的适配">
 <meta property="og:url" content="http://yoursite.com/2017/11/28/iPhoneX和iOS-11的适配/index.html">
 <meta property="og:site_name" content="玮杭の博客">
-<meta property="og:description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  适配导航栏的高度和底部Tabbar的距离，适配安全区域。  在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创">
+<meta property="og:description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  1.适配导航栏的高度和底部Tabbar的距离，适配安全区域。  2.在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationControl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T03:40:46.000Z">
+<meta property="og:updated_time" content="2017-11-29T05:26:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iPhoneX和iOS 11的适配">
-<meta name="twitter:description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  适配导航栏的高度和底部Tabbar的距离，适配安全区域。  在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创">
+<meta name="twitter:description" content="iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34 因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：  1.适配导航栏的高度和底部Tabbar的距离，适配安全区域。  2.在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationControl">
 
 
 
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  285
+                  334
                 </span>
               
 
@@ -377,21 +377,32 @@
       
         <p>iPhone X 的导航栏的高度是88，状态栏的高度是44，底部Tabbar的高度是83，圆角以下的距离为34</p>
 <p>因为我们这边项目采用的是代码布局，所以适配iPhone X的，修改的代码比较多，主要是以下几个问题：</p>
-<ol>
-<li><p>适配导航栏的高度和底部Tabbar的距离，适配安全区域。</p>
-</li>
-<li><p>在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创建导航控制器，重写push方法。代码如下：<a id="more"></a></p>
-<p>-(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{</p>
-<p>if (self.viewControllers.count &gt; 0) {</p>
-<pre><code>viewController.hidesBottomBarWhenPushed = YES;
-</code></pre><p>}</p>
-<p>[super pushViewController:viewController animated:animated];</p>
-<p>//修改tabbar的frame<br>CGRect frame = self.tabBarController.tabBar.frame;<br>frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;<br>self.tabBarController.tabBar.frame = frame;</p>
-</li>
-</ol>
-<p>}</p>
-<p>3.在wkwebView的 - (void)webView:(WKWebView <em>)webView decidePolicyForNavigationAction:(WKNavigationAction </em>)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler 方法中执行到<br> decisionHandler(WKNavigationActionPolicyAllow) 的方法会崩溃。在iOS 11 之前是这种方法不会崩溃，崩溃的原因是decisionHandler(WKNavigationActionPolicyAllow) 代码调用多次，然后调整代码后，使其只调用一次。</p>
+<p> 1.适配导航栏的高度和底部Tabbar的距离，适配安全区域。</p>
+<p> 2.在Tabbar页面push到其他页面的时候，Tabbar会上移，修改方法是继承UINavigationController创建导航控制器，重写push方法。代码如下：<a id="more"></a></p>
+<pre><code> -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+
+
+    if (self.viewControllers.count &gt; 0) {
+viewController.hidesBottomBarWhenPushed = YES;
+}
+
+[super pushViewController:viewController animated:animated];
+
+//修改tabbar的frame
+    CGRect frame = self.tabBarController.tabBar.frame;
+frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+self.tabBarController.tabBar.frame = frame;
+
+}
+</code></pre><p>3.在wkwebView的 - (void)webView:(WKWebView <em>)webView decidePolicyForNavigationAction:(WKNavigationAction </em>)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler 方法中执行到<br> decisionHandler(WKNavigationActionPolicyAllow) 的方法会崩溃。在iOS 11 之前是这种方法不会崩溃，崩溃的原因是decisionHandler(WKNavigationActionPolicyAllow) 代码调用多次，然后调整代码后，使其只调用一次。</p>
 <p>4.在Assets.xcassets中的LaunchImage中添加一个1125x2436像素的启动图。</p>
+<p>5.iOS 11 取消了automaticallyAdjustsScrollViewInsets,在项目中加入以下代码</p>
+<pre><code>if (@available(ios 11.0,*)) {
+    UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+}else{
+self.automaticallyAdjustsScrollViewInsets = false; 
+}
+</code></pre><p>6.Xcode9 打包构建新版本的时候要加入1024*1024 AppStore icon</p>
 <p>以上就是目前适配遇到的问题。 </p>
 
       
@@ -626,7 +637,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共10.9k字</span>
+  <span class="post-count">博客全站共11.2k字</span>
 </div>
 
         
