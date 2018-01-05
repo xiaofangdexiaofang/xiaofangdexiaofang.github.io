@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试题," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="搜狗iOS面试题iOS应用的文件目录都是什么？缓存文件存在哪个文件里？它的上一层是什么？ SDWebImage图片处理原理？ SDWebImage在iOS9 3dtouch下出现的问题？ NSArray和NSMutableArray在Copy和MutableCopy下的内存是怎样的？">
+<meta name="keywords" content="面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发面试题">
+<meta property="og:url" content="http://yoursite.com/2017/10/07/iOS开发面试题/index.html">
+<meta property="og:site_name" content="玮杭の博客">
+<meta property="og:description" content="搜狗iOS面试题iOS应用的文件目录都是什么？缓存文件存在哪个文件里？它的上一层是什么？ SDWebImage图片处理原理？ SDWebImage在iOS9 3dtouch下出现的问题？ NSArray和NSMutableArray在Copy和MutableCopy下的内存是怎样的？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-14T07:45:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发面试题">
+<meta name="twitter:description" content="搜狗iOS面试题iOS应用的文件目录都是什么？缓存文件存在哪个文件里？它的上一层是什么？ SDWebImage图片处理原理？ SDWebImage在iOS9 3dtouch下出现的问题？ NSArray和NSMutableArray在Copy和MutableCopy下的内存是怎样的？">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/07/iOS开发面试题/"/>
+
+
+
+
+
+  <title>iOS开发面试题 | 玮杭の博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/xiaofangdexiaofang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">玮杭の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">努力成为一个有用之人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/07/iOS开发面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Carl_chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="玮杭の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-07T10:40:13+08:00">
+                2017-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,604
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="搜狗iOS面试题"><a href="#搜狗iOS面试题" class="headerlink" title="搜狗iOS面试题"></a>搜狗iOS面试题</h3><p>iOS应用的文件目录都是什么？缓存文件存在哪个文件里？它的上一层是什么？</p>
+<p>SDWebImage图片处理原理？</p>
+<p>SDWebImage在iOS9 3dtouch下出现的问题？</p>
+<p>NSArray和NSMutableArray在Copy和MutableCopy下的内存是怎样的？<a id="more"></a></p>
+<p>用户下载一个图片，图片很大，需要分成很多份进行下载，使用GCD应该如何实现？使用什么队列？</p>
+<p>现有两个人和一张桌子，两个人依次在桌子上放硬币，硬币不能叠放、立着，若一方找不到放的位置则失败。若你在玩这个游戏，设计一个算法必赢。</p>
+<p>现有n个物品和一个体积为V的包，每件物品的体积是ci，价格是wi，现在请你往包中放，每件物品只能放一次，怎么放能让包的价格最大。</p>
+<h3 id="百度iOS面试题"><a href="#百度iOS面试题" class="headerlink" title="百度iOS面试题"></a>百度iOS面试题</h3><p>Delegate 、Notification和KVO比较各自的优缺点</p>
+<p>在一个UI的正中间实现一个正方形的红色视图有几种方式？</p>
+<p>手触碰到屏幕的时候，响应机制是怎样的？第一响应者是谁？追问 UIView和UIResponse的关系是什么？</p>
+<p>UIViewController的生命周期是什么？追问 UIViewController 只alloc而没用到的时候，UIViewController 的view是否加载了？如果没有加载那什么时候加载？</p>
+<p>直接用UILabel和自己用DrawRect画UILabel，哪个性能好？为什么？哪个占用的内存少？为什么?</p>
+<p>AFNetworking是否支持ipv6？</p>
+<p>项目采用64位，为什么要用64位？怎么修改成64位？i386是什么？他们有什么关系?</p>
+<p>iOS的应用程序有几种状态？追问，退到后台代码是否可以执行？双击home键，代码是否可以执行？</p>
+<p>一般使用的图标内存为多大？比如200×300的图片，内存应该占用多少比较合理？</p>
+<p>说说你对内存泄漏的看法，追问，block为什么容易引起内存泄漏？</p>
+<p>[object copy]是浅拷贝还是深拷贝？为什么是浅拷贝？copy是实现了哪个协议？</p>
+<p>Images.xcassets和直接用图片有什么不一样？</p>
+<h3 id="杭州-口碑-p6-7-面试题"><a href="#杭州-口碑-p6-7-面试题" class="headerlink" title="杭州-口碑-p6-7 面试题"></a>杭州-口碑-p6-7 面试题</h3><p> Nsstring栈空间占了多少？</p>
+<p> SD最大支持多少个下载数？</p>
+<p> yykit如何异步渲染？</p>
+<p> runtime动态创建一个类，需要注意什么？</p>
+<p> runloop和线程有和关系？</p>
+<p> 你平时做过什么有技术难点的东西，然后解决难点</p>
+<p> 你是如何学习iOS，看什么网站，列举几个国外的学习网站？</p>
+<p> 技术架构如何搭建？</p>
+<p> 还有一个很长字符串，你用什么算法搜索到abc的位置？</p>
+<p> 字符串如何预处理？</p>
+<p> https和ssl在握手方向有什么区别？</p>
+<p> 还有，你平时很忙，怎么学习和积累技术</p>
+<p> 怎么防止别人动态在你程序生成代码</p>
+<p> 怎么防止反编译</p>
+<p> Object-c中copy和mutableCopy 区别</p>
+<p> ViewController之间怎么传值</p>
+<p> 内存管理原则，MRC 和 ARC</p>
+<p> 应用的启动过程</p>
+<p> 推送原理（本地推送和远程推送）</p>
+<p> 定位</p>
+<p> 当画了一个图，就是subview有一部分view飘出来了，问点击飘出来的部分能不能响应点击事件？</p>
+<p> xcode中怎么给系统方法打断点</p>
+<p> xcode签名原理</p>
+<p> 怎么将符号转换成代码</p>
+<p> 字典模型的转换。引出MJExtension框架，问了MJExtension的原理，以前使用过程中有没有bug</p>
+<p>https原理</p>
+<p>###阿里面试<br>说一下frame与bounds的区别？</p>
+<p>你是怎么理解深拷贝和浅拷贝的？</p>
+<p>谈谈你对MVC/MVP/MVVM的理解，有在其基础上扩展的想法么？</p>
+<p>SDWebImgae 用什么方式判断gif/png图片的？</p>
+<p>自动释放池什么时候释放？</p>
+<p>AFN为什么添加一条常驻线程？</p>
+<p>简单叙述下KVC与KVO的实现原理？</p>
+<p>什么是进程？什么是线程？iOS多线程有几种，你平常开发喜欢用那种？</p>
+<p>GCD与NSOperation的区别，谁是最早推出的？</p>
+<p>说一下属性nonatomic与atomic区别，atomic是绝对安全的吗？谈谈你的看法。</p>
+<p>系统是怎样保证父类的类方法，在子类被调用？</p>
+<p>说一下分类的实现原理，分类为什么会覆盖原类的方法？</p>
+<p>说一下你对 id 的理解，你知道它的底层原理吗？</p>
+<p>什么是链表，链表逆序怎么实现？</p>
+<p>为什么HTTP连接的重用总是比新建连接性能要好？</p>
+<p>谈谈Swift与OC的区别？</p>
+<p>简单说一下Swift中的lazy？</p>
+<p>简单说一下Swift中的fileprivate / private / public / open？</p>
+<p>如何使用Swift 中的weak与unowned？</p>
+<p>Swift 中的Any 与 AnyObject的区别？</p>
+<p>阿里三面的面试题<br>1.DSYM你是如何分析的</p>
+<p>2.多线程有哪几种，你更倾向于哪一种？</p>
+<p>3.单利弊端</p>
+<p>4.如何把异步线程转换为同步任务进行单元测试</p>
+<p>5.介绍下APP启动的完成过程</p>
+<p>6.比如APP的启动过慢，你可能想到的因素有哪些</p>
+<p>7.OX8badfood表示是什么</p>
+<p>8.怎么防止反编译</p>
+<p>9.说说你遇到的技术难点</p>
+<p>10.说说你了解的第三方的原理或者底层知识</p>
+<h3 id="汽车之家面试题"><a href="#汽车之家面试题" class="headerlink" title="汽车之家面试题"></a>汽车之家面试题</h3><p>对大量数据列表有什么优化方案？</p>
+<p>内存优化，开启tableviewcell的重用机制在tableview的heightforrow函数中不要在调用cellforrow方法，应该把之前计算到的行高缓存起来，避免cellforrow被调用很多次</p>
+<p>对加载的数据进行存储，将加载过的数据存储到数据库中，及时清空内存中的数据</p>
+<p>进行分页处理，异步加载更多数据<br>如何检查app的内存和CPU的使用情况？检查有问题的时候如何处理？</p>
+<p>使用analyze检查代码有无内存泄露的可能产生</p>
+<p>使用leaks检查程序是否有内存泄露产生</p>
+<p>Xcode的instrument可以检测到app在运行时候的内存消耗，当内存占用量过大的时候即使释放掉不用的对象<br>app上有一数据列表，客户端和服务器都没有缓存服务器有数据更新的时候在wifi下能刷新到数据在4G下刷新不到数据，请分析可能产生的原因？</p>
+<p>用户禁止了该app使用蜂窝移动数据</p>
+<p>代码中可能为了省流量，对网络类型做了判断，只在wifi状态下发送请求</p>
+<p>当前维护app的崩溃率是多少？怎么最终并解决的？如何解决线上的闪退</p>
+<p>我们努力把崩溃率控制在5/1000 一下 ，使用plcrashreport第三方框架统计用户崩溃日志<br>什么是事件响应链，当用户和手机屏幕触摸的时候都发生了什么？事件是如何传递的。</p>
+<p>发生触摸事件后系统将触摸事件加入UIApplication管理的事件队列中，</p>
+<p>UIApplication会从事件队列中取出最前面的事件在将事件发送出去，通常会发给keywindow</p>
+<p>主窗口会在视图层次结构中找到最合适的视图来处理触摸事件</p>
+<p>找到合适的视图控件后，就会调用视图控件的touches方法来作事件的具体处理：touchesBegin…<br>touchesMoved…touchesEnded等</p>
+<p>会顺着响应者链条往子控件传递<br>UIView不能接收触摸事件情况有哪些：</p>
+<p>1.不接受用户交互：userInteractionEnabled = NO;</p>
+<p>2.隐藏：hidden = YES;</p>
+<p>3.透明：alpha = 0.0~0.01<br>如何找到最合适的控件来处理事件呢？有什么原则？</p>
+<p>自己是否能接受触摸事件</p>
+<p>触摸点是否在自己身上</p>
+<p>从后往前遍历子控件，重复上面的两个步骤</p>
+<p>如果没有符合条件的子控件，那么自己最适合处理<br>runloop是什么？，使用runloop的目的是什么？使用runloop要注意什么？何时使用？</p>
+<p>我朋友未回答<br>NSRunLoop是IOS消息机制的处理模式</p>
+<p>NSRunLoop的主要作用：控制NSRunLoop里面线程的执行和休眠，在有事情做的时候使当前NSRunLoop控制的线程工作，没有事情做让当前NSRunLoop的控制的线程休眠。</p>
+<p>NSRunLoop 就是一直在循环检测，从线程start到线程end，检测inputsource(如点击，双击等操作)异步事件，检测timesource同步事件，检测到输入源会执行处理函数，首先会产生通知，corefunction向线程添加runloop observers来监听事件，意在监听事件发生时来做处理。</p>
+<p>runloopmode是一个集合，包括监听：事件源，定时器，以及需通知的runloop observers<br>runloop与线程的关系？</p>
+<p>只有在为你的程序创建次线程的时候，才需要运行run loop。对于程序的主线程而言，run loop是关键部分。Cocoa提供了运行主线程run loop的代码同时也会自动运行run loop。IOS程序UIApplication中的run方法在程序正常启动的时候就会启动run loop。如果你使用xcode提供的模板创建的程序，那你永远不需要自己去启动run loop</p>
+<p>在多线程中，你需要判断是否需要run loop。如果需要run loop，那么你要负责配置run loop并启动。你不需要在任何情况下都去启动run loop。比如，你使用线程去处理一个预先定义好的耗时极长的任务时，你就可以毋毋需启动run loop。Run loop只在你要和线程有交互时才需要<br>进程和线程的区别？</p>
+<p>一个应用程序有且只有一个进程，一个进程有1个和多个线程<br>线程生命周期</p>
+<p>当我们创建一个线程实例对象的时候，这个线程是创建状态</p>
+<p>当调用了start的方法的时候，线程被启动，此时进入就绪状态，等待CUP来执行</p>
+<p>获取CPU的资源正在执行，这个时候进入运行状态</p>
+<p>当线程执行完毕，或者被其他线程杀死的时候这个时候线程进入死亡状态，死亡状态的线程不可能在进入等待执行的就绪状态</p>
+<p>由于某些原因，线程需要暂停自己，让出CPU的资源，这个时候线程进入阻塞状态</p>
+<h3 id="搜集其他的面试题"><a href="#搜集其他的面试题" class="headerlink" title="搜集其他的面试题"></a>搜集其他的面试题</h3><p><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md" target="_blank" rel="noopener">招聘一个靠谱的iOS</a></p>
+<p><a href="https://wangmeng.gitbooks.io/ios-note/content/interview_1.html" target="_blank" rel="noopener">iOS面试题</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>嘘寒问暖，不如打笔巨款</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://upload-images.jianshu.io/upload_images/1914840-19962c4974a36405.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Carl_chen 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/06/iOS-开发-内存泄漏/" rel="next" title="iOS 开发 内存泄漏">
+                <i class="fa fa-chevron-left"></i> iOS 开发 内存泄漏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/09/彩票APP-相关算法/" rel="prev" title="彩票APP 相关算法">
+                彩票APP 相关算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg"
+              alt="Carl_chen" />
+          
+            <p class="site-author-name" itemprop="name">Carl_chen</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搜狗iOS面试题"><span class="nav-number">1.</span> <span class="nav-text">搜狗iOS面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度iOS面试题"><span class="nav-number">2.</span> <span class="nav-text">百度iOS面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杭州-口碑-p6-7-面试题"><span class="nav-number">3.</span> <span class="nav-text">杭州-口碑-p6-7 面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汽车之家面试题"><span class="nav-number">4.</span> <span class="nav-text">汽车之家面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜集其他的面试题"><span class="nav-number">5.</span> <span class="nav-text">搜集其他的面试题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Carl_chen</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共15.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=youyan_uid"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Allocations," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Allocations: 检测一个APP内存分配和使用情况等，通常用来分析内存的增加和使用情况，对占用内存较多的地方进行优化。">
+<meta name="keywords" content="Allocations">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 开发 Allocations分析">
+<meta property="og:url" content="http://yoursite.com/2017/12/05/iOS-开发-Allocations分析/index.html">
+<meta property="og:site_name" content="玮杭の博客">
+<meta property="og:description" content="Allocations: 检测一个APP内存分配和使用情况等，通常用来分析内存的增加和使用情况，对占用内存较多的地方进行优化。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1914840-efdf77f07886b720.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-07T01:49:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 开发 Allocations分析">
+<meta name="twitter:description" content="Allocations: 检测一个APP内存分配和使用情况等，通常用来分析内存的增加和使用情况，对占用内存较多的地方进行优化。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1914840-efdf77f07886b720.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/05/iOS-开发-Allocations分析/"/>
+
+
+
+
+
+  <title>iOS 开发 Allocations分析 | 玮杭の博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/xiaofangdexiaofang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">玮杭の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">努力成为一个有用之人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/05/iOS-开发-Allocations分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Carl_chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="玮杭の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 开发 Allocations分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T18:40:19+08:00">
+                2017-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  976
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Allocations: 检测一个APP内存分配和使用情况等，通常用来分析内存的增加和使用情况，对占用内存较多的地方进行优化。<a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1914840-efdf77f07886b720.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-12-06 上午11.37.35.png"></p>
+<p>列表页面下有四个不同的选项模式</p>
+<p>1.Statistics </p>
+<p>2.Call Trees</p>
+<p>3.Allocations List</p>
+<p>4.Generations</p>
+<h3 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h3><p>Category: Allocation类型</p>
+<p>Persistent Bytes: 已占用的内存大小</p>
+<p>Transient: 已经释放的内存对象数量</p>
+<p>Persistent: 已占用的内存数量数量</p>
+<p>Total Bytes: 已占用和已经释放的内存大小</p>
+<p>All Heap &amp; Anonymouns VM: 所有真实内存和虚拟内存</p>
+<p>All Heap Allocations: 所有真实内存</p>
+<p>All Anonymous VM: 所有分配过的虚拟内存</p>
+<p>VM:ImageIO_PNG Data: 这个和图片的加载方式有关系</p>
+<p>VM:Dispatch continuation: 这个是DCD的缓存，暂不考虑</p>
+<p>VM:CG raster data: 和SDWebImage有关</p>
+<h3 id="Generations"><a href="#Generations" class="headerlink" title="Generations"></a>Generations</h3><p>这个功能是非常有用的，一般是这样用的：进入一个页面前mark一下，在退出这个页面的时候再mark一下可以比较哪些内容增加了，就可以具体分析哪些内存没有被释放</p>
+<h3 id="Allocations-List"><a href="#Allocations-List" class="headerlink" title="Allocations List"></a>Allocations List</h3><p>和Statistics相比较多了调用库和方法的展示</p>
+<h3 id="Call-Trees"><a href="#Call-Trees" class="headerlink" title="Call Trees"></a>Call Trees</h3><p>这里的功能需要我们把列表展示类型切换成Call Trees，能够非常清晰的看到调用树</p>
+<p>这里边有以下几个调用参数</p>
+<p>Separate by Category: 按照类别区分，可以看到哪些VM，哪些是真实，选择</p>
+<p>Separate by Thread: 按照线程划分</p>
+<p>Invert Call Tree：反转调用，选择</p>
+<p>Hide System Libraries：隐藏系统的方法，选择</p>
+<p>Flatten Recursion：扁平化递归，选择</p>
+<p>Call Tree Constraints: 对列表中的数据进行过滤</p>
+<p>Data Mining: 数据挖掘</p>
+<h3 id="虚拟内存的优化（All-VM-Regions）"><a href="#虚拟内存的优化（All-VM-Regions）" class="headerlink" title="虚拟内存的优化（All VM Regions）"></a>虚拟内存的优化（All VM Regions）</h3><p>1.VM:CG raster data  关于此处优化，通过在Appdelegate添加以下设置，即可降低内存大小。原先设置下面的原因是（减压缩图片，并将图片存到cache使得之后的加载更加快，效果更加好，能更快的读取图片）</p>
+<pre><code>[[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
+
+[[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
+</code></pre><p>2.VM:ImageIO_PNG Data</p>
+<pre><code>1:对于大的图片且偶尔需要显示的应放到工程目录下，不要放到Assets.xcassets中；并使用imageWithContentsOfFile加载不让系统缓存
+
+2:对于经常需要展示的小图片放到Assets.xcassets中让系统缓存，使用imageNamed加载
+
+3:[UIImage imageNamed:@&quot;hearderImage&quot;]
+使用这个方法生成的UIImage对象,会在应用的bundle中寻找图片,如果找到则Cache到系统缓存中,作为内存的cache.而且这里的内存缓存直到程序退出时才释放
+
+而程序员是无法操作cache的,只能由系统自动处理,如果我们需要重复加载一张图片,那这无疑是一种很好的方式,因为系统能很快的从内存的cache找到这张图片.
+
+但是试想,如果加载很多很大的图片的时候,内存消耗过大的时候,就会会强制释放内存，即会遇到内存警告(memory warnings).由于在iOS系统中释放图片的内存比较麻烦,所以冲易产生内存泄露
+
+4:NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:extension];
+UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+
+使用imageWithContentsOfFile的方式加载的图片，图片会被系统以数据的方式进行加载.返回的对象不会保存在缓存中，一旦对象销毁就会释放内存，所以一般不会因为加载图片的方法遇到内存问题.
+
+所以当有些图片在应用中只使用比较少的次数的，就可以用这样的方式，相比imageNamed会降低内存消耗,避免一些内存问题.
+</code></pre><p>所以通过以上的不同场景下调用不同的方法，可以使得此项内存降低。</p>
+<p>3.VM:CoreAnimation 记录</p>
+<p>4.VM:CoreServices 记录</p>
+<p>5.VM:Image IO 记录</p>
+<h3 id="真实内存的优化（All-Heap-Allocations）"><a href="#真实内存的优化（All-Heap-Allocations）" class="headerlink" title="真实内存的优化（All Heap Allocations）"></a>真实内存的优化（All Heap Allocations）</h3><p>记录</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>嘘寒问暖，不如打笔巨款</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://upload-images.jianshu.io/upload_images/1914840-19962c4974a36405.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Carl_chen 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Allocations/" rel="tag"># Allocations</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/28/iPhoneX和iOS-11的适配/" rel="next" title="iPhoneX和iOS 11的适配">
+                <i class="fa fa-chevron-left"></i> iPhoneX和iOS 11的适配
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/19/RN系列文章/" rel="prev" title="RN系列文章">
+                RN系列文章 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg"
+              alt="Carl_chen" />
+          
+            <p class="site-author-name" itemprop="name">Carl_chen</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Statistics"><span class="nav-number">1.</span> <span class="nav-text">Statistics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generations"><span class="nav-number">2.</span> <span class="nav-text">Generations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Allocations-List"><span class="nav-number">3.</span> <span class="nav-text">Allocations List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Call-Trees"><span class="nav-number">4.</span> <span class="nav-text">Call Trees</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟内存的优化（All-VM-Regions）"><span class="nav-number">5.</span> <span class="nav-text">虚拟内存的优化（All VM Regions）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真实内存的优化（All-Heap-Allocations）"><span class="nav-number">6.</span> <span class="nav-text">真实内存的优化（All Heap Allocations）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Carl_chen</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共15.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=youyan_uid"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
