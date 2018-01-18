@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="玮杭の博客">
 <meta property="og:description" content="搞这个Appium自动化测试断断续续也有两周的时候，很早之前也了解过，但是没有实际的应用，这次算是真正的项目实践。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-05T07:35:12.000Z">
+<meta property="og:updated_time" content="2018-01-05T09:11:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python自动化测试">
 <meta name="twitter:description" content="搞这个Appium自动化测试断断续续也有两周的时候，很早之前也了解过，但是没有实际的应用，这次算是真正的项目实践。">
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  577
+                  543
                 </span>
               
 
@@ -378,8 +378,7 @@
         <p>搞这个Appium自动化测试断断续续也有两周的时候，很早之前也了解过，但是没有实际的应用，这次算是真正的项目实践。<a id="more"></a></p>
 <p>由于本公司秉承开发即测试的原则，所有项目上线后容易出现bug，可能也是由于自己以前太依赖测试，对这方面不怎么注意。还好现在意识到问题的重要性，于是慢慢的自己看是接触点测试的工作，这样更便于注意写代码。</p>
 <p>在之前的公司，也用过Xocde自带的单元测试，这个比较适合逻辑代码的验证和网络请求，目前的公司由于比较赶时间，这些就没有施行，但是后续问题慢慢的也就出现了，因为项目比较大且复杂，最主要改动很频繁，需求变化快，这就很尴尬了，每次测试过的地方还要再次测试，还容易出现bug，所以自己就搞了这个自动化测试。</p>
-<p>此文章先记录遇到的问题，后续再出相关的环境的搭建以及工具的安装和配置，以免再次踩坑。</p>
-<p>1.We wanted {“required”:[“value”]} and you sent [“value”,”text”,”id”,”sessionI</p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>1.We wanted {“required”:[“value”]} and you sent [“value”,”text”,”id”,”sessionI</p>
 <p>上面这个问题是我在测试登录模块的时候遇到的，当弹出键盘，要在输入框输入内容时，脚本停止，然后出现这个错误，Google了下，（顺便一提，能用Google最好，可以省下你很多时间）说是selenium版本的问题，把selenium版本降到3.0.1 就可以了。</p>
 <p>首先到python的目录里面找一下selenium的路径（pip show selenium）=&gt;  /Library/Python/2.7/site-packages<br>删除老的版本，然后终端安装的版本pip install selenium==3.0.1<br>(PS:3.5的版本路径/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages)</p>
 <p>我的电脑安装了两个版本 一个是python2.7 这个是Mac自带的<br>路径是/Library/Python/2.7</p>
@@ -508,8 +507,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -574,6 +582,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
