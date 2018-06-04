@@ -374,45 +374,14 @@
 
       
         
-          
-            <p>#卡顿优化<br>这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化</p>
-<ul>
-<li><p>tableView的视图头部做懒加载处理，不然每次滑动到tableView的头部时候，都会调用相关的方法，比较耗时，也占内存。要注意的时，如果头部视图有变量的话，要单独做处理。</p>
-</li>
-<li><p>由于此页面cell高度不一样，所以要计算，但是每次一滑动，都会调用高度的方法，也是比较耗时，所以这边通过NSCache做缓存处理，以每个订单的orderId为键，这样比较好处理。每次先去缓存中找，找不到去掉cell方法中的计算高度，然后回调，并且缓存。</p>
-</li>
-<li><p>这边用到圆形头像图片，直接用layer.cornerRadius和layer.masksToBounds会导致离屏渲染，但是单独调用layer.cornerRadius不会，所以可以正对UIButton使用，这里图片是Core Graphics直接异步绘制的裁剪成圆形的。</p>
-</li>
-<li><p>只加载视图范围内的cell，但是这边容易导致快速滑动的时候，会用空白，未采用。</p>
-</li>
-<li>减少cell的层级，层级比较多和复杂，绘制比较耗时</li>
-<li>滑动的时候使用默认头像处理，待滑动停止，再加载图片（还未处理）</li>
-<li>异步渲染内容到图片（未处理）</li>
-<li><p>按照滑动速度按需加载内容（未处理）</p>
-<p>后面三种方法是参考此地址优化的 [VVeboTableViewDemo]（<a href="https://github.com/johnil/VVeboTableViewDemo" target="_blank" rel="noopener">https://github.com/johnil/VVeboTableViewDemo</a><br>）</p>
-</li>
-</ul>
-<p>#安装包优化<br>这边主要做以下处理</p>
-<ul>
-<li>将项目中的图片资源压缩，采用无损压缩。图片压缩使用的是ImageOptim工具，总共图片资源3M多，减少了621k，优化超过1/6，很有效率</li>
-<li>代码部分优化，去掉无用的引用及代码，然后还有项目中的警告，删除注释和输出</li>
-<li>不常用的资源换为下载</li>
-<li>网上所说的针对可执行文件进行优化（还未分析）</li>
-</ul>
-<p>#网络优化</p>
-<ul>
-<li><p>我们项目中的个人中心页面包括许多数据，各个页面传递过来的，如果采用的通知的话，很麻烦。然后就做了每次进入页面刷新一遍。后来发现这样处理也有个问题，有的时候值跳转页面需要值，但是还没拿到就跳转，容易出问题，而且频繁请求，用户体验不好。然后，我们这边结合后台做了这样的处理：App端第一次请求接口，服务端返回成功，HTTP Status为200，并且在返回的Header中用Last-Modified表明服务器中该资源最后被修改的时间，App端第二次请求该接口，Header中传递本地缓存的Header中的Last-Modified,如果服务器端的资源并未发生变化，则会返回HTTP Status为304，我们直接可以使用本地的缓存，传输流量更少，相对而言，用户的等待时间会更短</p>
-</li>
-<li><p>当页面正在请求数据的时候，pop或者dis页面的时候，将网络请求cancel，减少用户流量</p>
-</li>
-</ul>
-<p>#启动优化<br>先说结论，t(App总启动时间) = t1(main()之前的加载时间) + t2(main()之后的加载时间)。 t1 = 系统dylib(动态链接库)和自身App可执行文件的加载；<br>t2 = main方法执行之后到AppDelegate类中的- (BOOL)Application:(UIApplication <em>)Application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions方法执行结束前这段时间，主要是构建第一个界面，并完成渲染展示。</p>
-<p>感觉项目中启动速度蛮快的，后续再分析</p>
-<p>#内存优化<br>前面文章已有部分分析</p>
-<p>#电量优化<br>暂无</p>
-<p>#布局优化<br>暂无</p>
-
-          
+          <p>#卡顿优化<br>这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/04/APP性能优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
