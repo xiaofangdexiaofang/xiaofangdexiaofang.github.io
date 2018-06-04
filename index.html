@@ -251,6 +251,216 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/APP性能优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Carl_chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="玮杭の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/04/APP性能优化/" itemprop="url">APP性能优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T14:44:12+08:00">
+                2018-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/优化/" itemprop="url" rel="index">
+                    <span itemprop="name">优化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  943
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#卡顿优化<br>这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化</p>
+<ul>
+<li><p>tableView的视图头部做懒加载处理，不然每次滑动到tableView的头部时候，都会调用相关的方法，比较耗时，也占内存。要注意的时，如果头部视图有变量的话，要单独做处理。</p>
+</li>
+<li><p>由于此页面cell高度不一样，所以要计算，但是每次一滑动，都会调用高度的方法，也是比较耗时，所以这边通过NSCache做缓存处理，以每个订单的orderId为键，这样比较好处理。每次先去缓存中找，找不到去掉cell方法中的计算高度，然后回调，并且缓存。</p>
+</li>
+<li><p>这边用到圆形头像图片，直接用layer.cornerRadius和layer.masksToBounds会导致离屏渲染，但是单独调用layer.cornerRadius不会，所以可以正对UIButton使用，这里图片是Core Graphics直接异步绘制的裁剪成圆形的。</p>
+</li>
+<li><p>只加载视图范围内的cell，但是这边容易导致快速滑动的时候，会用空白，未采用。</p>
+</li>
+<li>减少cell的层级，层级比较多和复杂，绘制比较耗时</li>
+<li>滑动的时候使用默认头像处理，待滑动停止，再加载图片（还未处理）</li>
+<li>异步渲染内容到图片（未处理）</li>
+<li><p>按照滑动速度按需加载内容（未处理）</p>
+<p>后面三种方法是参考此地址优化的 [VVeboTableViewDemo]（<a href="https://github.com/johnil/VVeboTableViewDemo" target="_blank" rel="noopener">https://github.com/johnil/VVeboTableViewDemo</a><br>）</p>
+</li>
+</ul>
+<p>#安装包优化<br>这边主要做以下处理</p>
+<ul>
+<li>将项目中的图片资源压缩，采用无损压缩。图片压缩使用的是ImageOptim工具，总共图片资源3M多，减少了621k，优化超过1/6，很有效率</li>
+<li>代码部分优化，去掉无用的引用及代码，然后还有项目中的警告，删除注释和输出</li>
+<li>不常用的资源换为下载</li>
+<li>网上所说的针对可执行文件进行优化（还未分析）</li>
+</ul>
+<p>#网络优化</p>
+<ul>
+<li><p>我们项目中的个人中心页面包括许多数据，各个页面传递过来的，如果采用的通知的话，很麻烦。然后就做了每次进入页面刷新一遍。后来发现这样处理也有个问题，有的时候值跳转页面需要值，但是还没拿到就跳转，容易出问题，而且频繁请求，用户体验不好。然后，我们这边结合后台做了这样的处理：App端第一次请求接口，服务端返回成功，HTTP Status为200，并且在返回的Header中用Last-Modified表明服务器中该资源最后被修改的时间，App端第二次请求该接口，Header中传递本地缓存的Header中的Last-Modified,如果服务器端的资源并未发生变化，则会返回HTTP Status为304，我们直接可以使用本地的缓存，传输流量更少，相对而言，用户的等待时间会更短</p>
+</li>
+<li><p>当页面正在请求数据的时候，pop或者dis页面的时候，将网络请求cancel，减少用户流量</p>
+</li>
+</ul>
+<p>#启动优化<br>先说结论，t(App总启动时间) = t1(main()之前的加载时间) + t2(main()之后的加载时间)。 t1 = 系统dylib(动态链接库)和自身App可执行文件的加载；<br>t2 = main方法执行之后到AppDelegate类中的- (BOOL)Application:(UIApplication <em>)Application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions方法执行结束前这段时间，主要是构建第一个界面，并完成渲染展示。</p>
+<p>感觉项目中启动速度蛮快的，后续再分析</p>
+<p>#内存优化<br>前面文章已有部分分析</p>
+<p>#电量优化<br>暂无</p>
+<p>#布局优化<br>暂无</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/Java连接数据库和输出Json数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1854,185 +2064,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/18/HTTP的理解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Carl_chen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="玮杭の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/18/HTTP的理解/" itemprop="url">HTTP的理解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T10:20:53+08:00">
-                2017-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,084
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种网络传输协议，所有的WWW文件都必须遵守这个标准。<br>HTTP是一个基于<code>TCP/IP通信协议</code>来传递数据（HTML 文件, 图片文件, 查询结果等）。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/18/HTTP的理解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2086,7 +2117,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2108,7 +2139,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2182,7 +2213,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共16.8k字</span>
+  <span class="post-count">博客全站共17.8k字</span>
 </div>
 
         
