@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS开发," />
+  <meta name="keywords" content="ReactNative," />
 
 
 
@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="#卡顿优化这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化">
-<meta name="keywords" content="iOS开发">
+<meta name="description" content="目前所在的公司做的是项目是RN的框架，需要在里面嵌入原生，这边主要记录下RN和iOS原生的交互。">
+<meta name="keywords" content="ReactNative">
 <meta property="og:type" content="article">
-<meta property="og:title" content="APP性能优化">
-<meta property="og:url" content="http://yoursite.com/2018/06/04/APP性能优化/index.html">
+<meta property="og:title" content="RN和iOS的交互">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/RN和iOS的交互/index.html">
 <meta property="og:site_name" content="玮杭の博客">
-<meta property="og:description" content="#卡顿优化这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化">
+<meta property="og:description" content="目前所在的公司做的是项目是RN的框架，需要在里面嵌入原生，这边主要记录下RN和iOS原生的交互。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T08:05:03.000Z">
+<meta property="og:updated_time" content="2019-06-22T09:14:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="APP性能优化">
-<meta name="twitter:description" content="#卡顿优化这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化">
+<meta name="twitter:title" content="RN和iOS的交互">
+<meta name="twitter:description" content="目前所在的公司做的是项目是RN的框架，需要在里面嵌入原生，这边主要记录下RN和iOS原生的交互。">
 
 
 
@@ -110,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/04/APP性能优化/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/06/22/RN和iOS的交互/"/>
 
 
 
 
 
-  <title>APP性能优化 | 玮杭の博客</title>
+  <title>RN和iOS的交互 | 玮杭の博客</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/APP性能优化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/RN和iOS的交互/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Carl_chen">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">APP性能优化</h1>
+          <h1 class="post-title" itemprop="name headline">RN和iOS的交互</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T14:44:12+08:00">
-                2018-06-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-22T16:31:09+08:00">
+                2019-06-22
               </time>
             
 
@@ -294,28 +294,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/优化/" itemprop="url" rel="index">
-                    <span itemprop="name">优化</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -338,7 +316,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,002
+                  360
                 </span>
               
 
@@ -354,7 +332,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  1
                 </span>
               
             </div>
@@ -375,46 +353,24 @@
       
 
       
-        <p>#卡顿优化<br>这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化<a id="more"></a></p>
-<ul>
-<li><p>tableView的视图头部做懒加载处理，不然每次滑动到tableView的头部时候，都会调用相关的方法，比较耗时，也占内存。要注意的时，如果头部视图有变量的话，要单独做处理。</p>
-</li>
-<li><p>由于此页面cell高度不一样，所以要计算，但是每次一滑动，都会调用高度的方法，也是比较耗时，所以这边通过NSCache做缓存处理，以每个订单的orderId为键，这样比较好处理。每次先去缓存中找，找不到去掉cell方法中的计算高度，然后回调，并且缓存。</p>
-</li>
-<li><p>这边用到圆形头像图片，直接用layer.cornerRadius和layer.masksToBounds会导致离屏渲染，但是单独调用layer.cornerRadius不会，所以可以正对UIButton使用，这里图片是Core Graphics直接异步绘制的裁剪成圆形的。</p>
-</li>
-<li><p>只加载视图范围内的cell，但是这边容易导致快速滑动的时候，会用空白，未采用。</p>
-</li>
-<li>减少cell的层级，层级比较多和复杂，绘制比较耗时</li>
-<li>滑动的时候使用默认头像处理，待滑动停止，再加载图片（还未处理）</li>
-<li>异步渲染内容到图片（未处理）</li>
-<li><p>按照滑动速度按需加载内容（未处理）</p>
-<p>后面三种方法是参考此地址优化的 [VVeboTableViewDemo]（<a href="https://github.com/johnil/VVeboTableViewDemo" target="_blank" rel="noopener">https://github.com/johnil/VVeboTableViewDemo</a><br>）</p>
-</li>
+        <p>目前所在的公司做的是项目是RN的框架，需要在里面嵌入原生，这边主要记录下RN和iOS原生的交互。<a id="more"></a></p>
+<h3 id="RN框架嵌入原生"><a href="#RN框架嵌入原生" class="headerlink" title="RN框架嵌入原生"></a>RN框架嵌入原生</h3><h4 id="RN调原生"><a href="#RN调原生" class="headerlink" title="RN调原生"></a>RN调原生</h4><ul>
+<li>在iOS中创建工具类，继承NSObject,遵守RCTBridgeModule协议,在.m文件中创建的方法，前面加上RCT_EXPORT_METHOD。</li>
+<li>在RN中import NativeModules,然后就可以使用iOS中的工具类中方法，也可以在iOS中创建回调函数，将iOS端的值传递给RN端。</li>
 </ul>
-<p>#安装包优化<br>这边主要做以下处理</p>
-<ul>
-<li>将项目中的图片资源压缩，采用无损压缩。图片压缩使用的是ImageOptim工具，总共图片资源3M多，减少了621k，优化超过1/6，很有效率</li>
-<li>代码部分优化，去掉无用的引用及代码，然后还有项目中的警告，删除注释和输出</li>
-<li>不常用的资源换为下载</li>
-<li>网上所说的针对可执行文件进行优化（还未分析）</li>
+<h4 id="原生调RN"><a href="#原生调RN" class="headerlink" title="原生调RN"></a>原生调RN</h4><ul>
+<li>主要用到的就是通知，在iOS中创建通知类，继承RCTEventEmitter,遵守RCTBridgeMoudle协议</li>
+<li>在RN中import NativeEventEmitter ,然后增加一个监听，eventType参数是两边约好的，这样就能监听到原生发送的通知，从而实现了原生调RN的代码</li>
 </ul>
-<p>#网络优化</p>
-<ul>
-<li><p>我们项目中的个人中心页面包括许多数据，各个页面传递过来的，如果采用的通知的话，很麻烦。然后就做了每次进入页面刷新一遍。后来发现这样处理也有个问题，有的时候值跳转页面需要值，但是还没拿到就跳转，容易出问题，而且频繁请求，用户体验不好。然后，我们这边结合后台做了这样的处理：App端第一次请求接口，服务端返回成功，HTTP Status为200，并且在返回的Header中用Last-Modified表明服务器中该资源最后被修改的时间，App端第二次请求该接口，Header中传递本地缓存的Header中的Last-Modified,如果服务器端的资源并未发生变化，则会返回HTTP Status为304，我们直接可以使用本地的缓存，传输流量更少，相对而言，用户的等待时间会更短</p>
-</li>
-<li><p>当页面正在请求数据的时候，pop或者dis页面的时候，将网络请求cancel，减少用户流量</p>
-</li>
-<li><p>结合业务场景，设置多个请求的执行的先后顺序以及时间</p>
-</li>
-<li><p>监控当前的网络状态，当网络断连，提示用户，当网络重新连接，自动调起请求获取数据</p>
-</li>
+<h3 id="原生框架嵌入RN"><a href="#原生框架嵌入RN" class="headerlink" title="原生框架嵌入RN"></a>原生框架嵌入RN</h3><h4 id="原生调用RN"><a href="#原生调用RN" class="headerlink" title="原生调用RN"></a>原生调用RN</h4><ul>
+<li>在原生的目录中创建ReactComponet文件夹，创建一个package.json,写入需要的库，然后npm install,生成node_modules文件夹，创建index.ios.js的入口文件，然后在项目中引入即可，执行的时候需要现在ReactComponet的文件夹下 执行npm start命令</li>
+<li>打离线包的时候，需要将模式修改为release，此外需要将js文件生成bundle文件</li>
+<li>如何生成bundle文件，使用curl命令生成mian.jsbundle文件，curl <a href="http://localhost:8081/index.ios.bundle" target="_blank" rel="noopener">http://localhost:8081/index.ios.bundle</a> -o mian.jsbundle</li>
+<li><a href="https://blog.csdn.net/u014410695/article/detail/50638797" target="_blank" rel="noopener">ReactNative 生成jsbundle的方法</a></li>
 </ul>
-<p>#启动优化<br>先说结论，t(App总启动时间) = t1(main()之前的加载时间) + t2(main()之后的加载时间)。 t1 = 系统dylib(动态链接库)和自身App可执行文件的加载；<br>t2 = main方法执行之后到AppDelegate类中的- (BOOL)Application:(UIApplication <em>)Application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions方法执行结束前这段时间，主要是构建第一个界面，并完成渲染展示。</p>
-<p>感觉项目中启动速度蛮快的，后续再分析</p>
-<p>#内存优化<br>前面文章已有部分分析</p>
-<p>#电量优化<br>暂无</p>
-<p>#布局优化<br>暂无</p>
+<h4 id="RN调用原生"><a href="#RN调用原生" class="headerlink" title="RN调用原生"></a>RN调用原生</h4><ul>
+<li>暂无，后续跟进</li>
+</ul>
 
       
     </div>
@@ -458,7 +414,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS开发/" rel="tag"># iOS开发</a>
+            <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
           
         </div>
       
@@ -471,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/23/Java连接数据库和输出Json数据/" rel="next" title="Java连接数据库和输出Json数据">
-                <i class="fa fa-chevron-left"></i> Java连接数据库和输出Json数据
+              <a href="/2019/06/22/iOS逆向开发/" rel="next" title="iOS逆向开发">
+                <i class="fa fa-chevron-left"></i> iOS逆向开发
               </a>
             
           </div>
@@ -480,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/22/直播模块/" rel="prev" title="直播模块">
-                直播模块 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,8 +489,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -603,6 +564,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RN框架嵌入原生"><span class="nav-number">1.</span> <span class="nav-text">RN框架嵌入原生</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RN调原生"><span class="nav-number">1.1.</span> <span class="nav-text">RN调原生</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原生调RN"><span class="nav-number">1.2.</span> <span class="nav-text">原生调RN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原生框架嵌入RN"><span class="nav-number">2.</span> <span class="nav-text">原生框架嵌入RN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原生调用RN"><span class="nav-number">2.1.</span> <span class="nav-text">原生调用RN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RN调用原生"><span class="nav-number">2.2.</span> <span class="nav-text">RN调用原生</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
