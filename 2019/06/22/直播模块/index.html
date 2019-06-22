@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="目前在一家新零售的公司做直播模块，包括iOS和安卓。 直播推拉流技术####主播端 1.音视频采集，使用的是AVFoundation 2.视频处理，GPUImage美颜，水印等 3.音视频编码压缩，包括软编码和硬编码 4.推流，主要走协议（RTMP，HLS，FLV） ####服务器端 1.数据分发 2.截屏 3.录制 4.转码等 ####用户端 1.拉流（RTMP，HLS，FLV） 2.解码 3.">
+<meta name="description" content="目前在一家新零售的公司做直播模块，包括iOS和安卓。">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="直播模块">
 <meta property="og:url" content="http://yoursite.com/2019/06/22/直播模块/index.html">
 <meta property="og:site_name" content="玮杭の博客">
-<meta property="og:description" content="目前在一家新零售的公司做直播模块，包括iOS和安卓。 直播推拉流技术####主播端 1.音视频采集，使用的是AVFoundation 2.视频处理，GPUImage美颜，水印等 3.音视频编码压缩，包括软编码和硬编码 4.推流，主要走协议（RTMP，HLS，FLV） ####服务器端 1.数据分发 2.截屏 3.录制 4.转码等 ####用户端 1.拉流（RTMP，HLS，FLV） 2.解码 3.">
+<meta property="og:description" content="目前在一家新零售的公司做直播模块，包括iOS和安卓。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-22T05:58:02.000Z">
+<meta property="og:updated_time" content="2019-06-22T06:05:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="直播模块">
-<meta name="twitter:description" content="目前在一家新零售的公司做直播模块，包括iOS和安卓。 直播推拉流技术####主播端 1.音视频采集，使用的是AVFoundation 2.视频处理，GPUImage美颜，水印等 3.音视频编码压缩，包括软编码和硬编码 4.推流，主要走协议（RTMP，HLS，FLV） ####服务器端 1.数据分发 2.截屏 3.录制 4.转码等 ####用户端 1.拉流（RTMP，HLS，FLV） 2.解码 3.">
+<meta name="twitter:description" content="目前在一家新零售的公司做直播模块，包括iOS和安卓。">
 
 
 
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  755
+                  738
                 </span>
               
 
@@ -375,28 +375,50 @@
       
 
       
-        <p>目前在一家新零售的公司做直播模块，包括iOS和安卓。</p>
-<h3 id="直播推拉流技术"><a href="#直播推拉流技术" class="headerlink" title="直播推拉流技术"></a>直播推拉流技术</h3><p>####主播端</p>
-<p>1.音视频采集，使用的是AVFoundation</p>
-<p>2.视频处理，GPUImage美颜，水印等</p>
-<p>3.音视频编码压缩，包括软编码和硬编码</p>
-<p>4.推流，主要走协议（RTMP，HLS，FLV）</p>
-<p>####服务器端</p>
-<p>1.数据分发</p>
-<p>2.截屏</p>
-<p>3.录制</p>
-<p>4.转码等</p>
-<p>####用户端</p>
-<p>1.拉流（RTMP，HLS，FLV）</p>
-<p>2.解码</p>
-<p>3.播放</p>
+        <p>目前在一家新零售的公司做直播模块，包括iOS和安卓。<a id="more"></a></p>
+<h3 id="直播推拉流技术"><a href="#直播推拉流技术" class="headerlink" title="直播推拉流技术"></a>直播推拉流技术</h3><h4 id="主播端"><a href="#主播端" class="headerlink" title="主播端"></a>主播端</h4><ul>
+<li><p>音视频采集，使用的是AVFoundation</p>
+</li>
+<li><p>视频处理，GPUImage美颜，水印等</p>
+</li>
+<li><p>音视频编码压缩，包括软编码和硬编码</p>
+</li>
+<li><p>推流，主要走协议（RTMP，HLS，FLV）</p>
+</li>
+</ul>
+<h4 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h4><ul>
+<li><p>数据分发</p>
+</li>
+<li><p>截屏</p>
+</li>
+<li><p>录制</p>
+</li>
+<li><p>转码等</p>
+</li>
+</ul>
+<h4 id="用户端"><a href="#用户端" class="headerlink" title="用户端"></a>用户端</h4><ul>
+<li><p>拉流（RTMP，HLS，FLV）</p>
+</li>
+<li><p>解码</p>
+</li>
+<li><p>播放</p>
+</li>
+</ul>
 <p>我在开发的过程中，使用过LFLiveKit，AlivcLivePusher，TXLiteAVSDK_Smart 这三个推流SDK，播放器用的ijkplayer。<br>说实话技术上没啥难点，都是用别人的东西，看文档的时候认真点就行，这边说几个注意点吧。</p>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>1.阿里的美颜只有基础美颜不收费，腾讯的美颜都收费，没基础版本</p>
-<p>2.主播分享当前直播的H5链接的时候，需要跳转到其他APP，需要在切换前台和后台的方法继续和暂停当前的推流，以防止回到直播页面的时候，界面会卡住</p>
-<p>3.当切换APP的时候，可以给当前的推流设置一个图片，显示当前主播暂时离开</p>
-<p>4.因为是在RN中嵌入原生的模块，会导致内存暴涨，虽然没没弄清为何会这样，但是我这边做处理了，当在直播的时候，收到内存警告是，要清除当前的缓存</p>
-<p>5.当你推流的时候，发现使用其中某一个人的账号时每次都闪退，但是用其他人的都没问题，而且报错的原因是推流SDK内部发生错误，[AlivcLivePreview onConnectionLost]，那么基本上就是你这个人的推流地址被禁止了，只需要在阿里云的后台恢复下即可</p>
-<p>6.阿里推流的视频都可以被保存下来的，直接存储到OSS对象存储里面的，阿里云的直播管理系统配置下就行</p>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li><p>阿里的美颜只有基础美颜不收费，腾讯的美颜都收费，没基础版本</p>
+</li>
+<li><p>主播分享当前直播的H5链接的时候，需要跳转到其他APP，需要在切换前台和后台的方法继续和暂停当前的推流，以防止回到直播页面的时候，界面会卡住</p>
+</li>
+<li><p>当切换APP的时候，可以给当前的推流设置一个图片，显示当前主播暂时离开</p>
+</li>
+<li><p>因为是在RN中嵌入原生的模块，会导致内存暴涨，虽然没没弄清为何会这样，但是我这边做处理了，当在直播的时候，收到内存警告是，要清除当前的缓存</p>
+</li>
+<li><p>当你推流的时候，发现使用其中某一个人的账号时每次都闪退，但是用其他人的都没问题，而且报错的原因是推流SDK内部发生错误，[AlivcLivePreview onConnectionLost]，那么基本上就是你这个人的推流地址被禁止了，只需要在阿里云的后台恢复下即可</p>
+</li>
+<li><p>阿里推流的视频都可以被保存下来的，直接存储到OSS对象存储里面的，阿里云的直播管理系统配置下就行</p>
+</li>
+</ul>
 <h3 id="直播聊天"><a href="#直播聊天" class="headerlink" title="直播聊天"></a>直播聊天</h3><p>聊天用的是融云的产品，主要就是直播聊天室<br>也没啥难点，就是看文档的时候认真点就行</p>
 <h4 id="注意点-1"><a href="#注意点-1" class="headerlink" title="注意点"></a>注意点</h4><p>在iOS的SDK中自己给自己发送消息是能接受到的，但是Andriod试了好多会都不行，提了个工单问下技术说可能被拦截了，所以接受不到消息</p>
 <h3 id="直播计费"><a href="#直播计费" class="headerlink" title="直播计费"></a>直播计费</h3><p>因为阿里官网没有具体的算法，所以自己大概计算了下</p>
@@ -610,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#直播推拉流技术"><span class="nav-number">1.</span> <span class="nav-text">直播推拉流技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意点"><span class="nav-number">1.1.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直播聊天"><span class="nav-number">2.</span> <span class="nav-text">直播聊天</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意点-1"><span class="nav-number">2.1.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直播计费"><span class="nav-number">3.</span> <span class="nav-text">直播计费</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按日峰值带宽"><span class="nav-number">3.1.</span> <span class="nav-text">按日峰值带宽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照流量计算"><span class="nav-number">3.2.</span> <span class="nav-text">按照流量计算</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#直播推拉流技术"><span class="nav-number">1.</span> <span class="nav-text">直播推拉流技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主播端"><span class="nav-number">1.1.</span> <span class="nav-text">主播端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器端"><span class="nav-number">1.2.</span> <span class="nav-text">服务器端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户端"><span class="nav-number">1.3.</span> <span class="nav-text">用户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意点"><span class="nav-number">1.4.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直播聊天"><span class="nav-number">2.</span> <span class="nav-text">直播聊天</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意点-1"><span class="nav-number">2.1.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直播计费"><span class="nav-number">3.</span> <span class="nav-text">直播计费</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按日峰值带宽"><span class="nav-number">3.1.</span> <span class="nav-text">按日峰值带宽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照流量计算"><span class="nav-number">3.2.</span> <span class="nav-text">按照流量计算</span></a></li></ol></li></ol></div>
             
 
           </div>
