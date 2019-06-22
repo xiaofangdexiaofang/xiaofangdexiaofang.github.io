@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="逆向," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="因为面试的时候，大家都对这个比较感兴趣，由于本人记性不好，回答的不全面，所以还是写下来，后面也方便。接触逆向是在18年10月份，到19年3月份为止就不做iOS逆向了，主要是所在地区招iOS逆向的很少，基本没有岗位招人做这方面。主要是以下的几个流程，感觉每个步骤都有很多的坑😂，很多东西都想不起来，这边会慢慢加">
+<meta name="keywords" content="逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS逆向开发">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/iOS逆向开发/index.html">
+<meta property="og:site_name" content="玮杭の博客">
+<meta property="og:description" content="因为面试的时候，大家都对这个比较感兴趣，由于本人记性不好，回答的不全面，所以还是写下来，后面也方便。接触逆向是在18年10月份，到19年3月份为止就不做iOS逆向了，主要是所在地区招iOS逆向的很少，基本没有岗位招人做这方面。主要是以下的几个流程，感觉每个步骤都有很多的坑😂，很多东西都想不起来，这边会慢慢加">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-22T08:21:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS逆向开发">
+<meta name="twitter:description" content="因为面试的时候，大家都对这个比较感兴趣，由于本人记性不好，回答的不全面，所以还是写下来，后面也方便。接触逆向是在18年10月份，到19年3月份为止就不做iOS逆向了，主要是所在地区招iOS逆向的很少，基本没有岗位招人做这方面。主要是以下的几个流程，感觉每个步骤都有很多的坑😂，很多东西都想不起来，这边会慢慢加">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/22/iOS逆向开发/"/>
+
+
+
+
+
+  <title>iOS逆向开发 | 玮杭の博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/xiaofangdexiaofang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">玮杭の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">努力成为一个有用之人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/iOS逆向开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Carl_chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="玮杭の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS逆向开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-22T14:32:07+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  854
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因为面试的时候，大家都对这个比较感兴趣，由于本人记性不好，回答的不全面，所以还是写下来，后面也方便。接触逆向是在18年10月份，到19年3月份为止就不做iOS逆向了，主要是所在地区招iOS逆向的很少，基本没有岗位招人做这方面。主要是以下的几个流程，感觉每个步骤都有很多的坑😂，很多东西都想不起来，这边会慢慢加 <a id="more"></a></p>
+<h3 id="从APPStore下载的需要砸壳，这边直接省略掉这个步骤，从PP助手里面下载是直接脱壳的"><a href="#从APPStore下载的需要砸壳，这边直接省略掉这个步骤，从PP助手里面下载是直接脱壳的" class="headerlink" title="从APPStore下载的需要砸壳，这边直接省略掉这个步骤，从PP助手里面下载是直接脱壳的"></a>从APPStore下载的需要砸壳，这边直接省略掉这个步骤，从PP助手里面下载是直接脱壳的</h3><h4 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h4><ul>
+<li>otool -l 可执行文件 | grep crypt 这个命令可以查看ipa包是否加壳</li>
+<li>otool -L DingTalk  依赖的库查询：系统库、支持的架构信息及版本号</li>
+<li>otool -tV DingTalk 汇编码 使用 otool -tV ex 则整个ARM的汇编码就都显示出来了</li>
+<li>otool -l DingTalk | grep -B 2 crypt 或者 otool -l xxx | grep crypt查看该应用是否砸壳</li>
+<li>otool -h DingTalkMach-O头结构等</li>
+<li><a href="https://blog.csdn.net/kissing_huo/article/details/78548942?locationNum=8" target="_blank" rel="noopener">参考iOS逆向-手把手教你写支付宝蚂蚁森林手机能量助手</a></li>
+<li>参考狗神和庆哥的书</li>
+</ul>
+<h4 id="去掉-RESTRICT-section步骤-和-ptrace两个保护"><a href="#去掉-RESTRICT-section步骤-和-ptrace两个保护" class="headerlink" title="去掉__RESTRICT section步骤 和 ptrace两个保护"></a>去掉__RESTRICT section步骤 和 ptrace两个保护</h4><ul>
+<li>ptrace 主要是防止加载调试器，__RESTRICT section 会妨碍cycript的使用</li>
+<li><a href="https://blog.csdn.net/kissing_huo/article/details/78548942?locationNum=8" target="_blank" rel="noopener">参考iOS逆向-手把手教你写支付宝蚂蚁森林手机能量助手</a></li>
+<li>参考狗神和庆哥的书</li>
+</ul>
+<h4 id="解决去掉-RESTRICT-section-和-ptrace-闪退问题"><a href="#解决去掉-RESTRICT-section-和-ptrace-闪退问题" class="headerlink" title="解决去掉 __RESTRICT section 和 ptrace 闪退问题"></a>解决去掉 __RESTRICT section 和 ptrace 闪退问题</h4><ul>
+<li>替换掉__RESTRICT section后，保存即可，然后替换掉里面的二进制文件</li>
+<li>最主要一步就是删除。app中的codesing签名的文件夹</li>
+<li><a href="http://iosre.com/t/--restrict---restrict/5770" target="_blank" rel="noopener">请参考这个帖子</a></li>
+</ul>
+<h3 id="获取头文件，使用这个工具class-dump"><a href="#获取头文件，使用这个工具class-dump" class="headerlink" title="获取头文件，使用这个工具class-dump"></a>获取头文件，使用这个工具class-dump</h3><ul>
+<li>class-dump -H AlipayWallet.decrypted -o ./</li>
+</ul>
+<h3 id="静态分析：连接手机使用cycript分析层级以及方法和属性"><a href="#静态分析：连接手机使用cycript分析层级以及方法和属性" class="headerlink" title="静态分析：连接手机使用cycript分析层级以及方法和属性"></a>静态分析：连接手机使用cycript分析层级以及方法和属性</h3><h4 id="使用cycript命令去调试打印"><a href="#使用cycript命令去调试打印" class="headerlink" title="使用cycript命令去调试打印"></a>使用cycript命令去调试打印</h4><ul>
+<li>Cycript是Objective-C++,ES6,Java等语法的混合物，用来修改调试正运行在内存中的app的</li>
+<li><a href="http://www.cycript.org/manual/" target="_blank" rel="noopener">具体参考文档</a></li>
+<li><a href="https://github.com/CoderMJLee/mjcript" target="_blank" rel="noopener">或者可以使用MJ封装的mjcript</a></li>
+<li>可以实时的打印出当前调试的值</li>
+</ul>
+<h4 id="使用THEOS自带的logify-pl生成对应类的全部方法调用和参数"><a href="#使用THEOS自带的logify-pl生成对应类的全部方法调用和参数" class="headerlink" title="使用THEOS自带的logify.pl生成对应类的全部方法调用和参数"></a>使用THEOS自带的logify.pl生成对应类的全部方法调用和参数</h4><ul>
+<li>/opt/theos/bin/logify.pl xxxx.h &gt; Tweak.xm</li>
+<li>编译Tweak.xm 注意：有编译报错，有些类和代理block是不认识的 出错的删除掉即可</li>
+</ul>
+<h3 id="动态分析：LLDB-debugserver，分析方法的调用以及参数"><a href="#动态分析：LLDB-debugserver，分析方法的调用以及参数" class="headerlink" title="动态分析：LLDB+debugserver，分析方法的调用以及参数"></a>动态分析：LLDB+debugserver，分析方法的调用以及参数</h3><ul>
+<li>参考狗神和庆哥的书</li>
+</ul>
+<h3 id="创建Tweak，通过theos创建，在要实现功能的函数下编写程序即可"><a href="#创建Tweak，通过theos创建，在要实现功能的函数下编写程序即可" class="headerlink" title="创建Tweak，通过theos创建，在要实现功能的函数下编写程序即可"></a>创建Tweak，通过theos创建，在要实现功能的函数下编写程序即可</h3><ul>
+<li><a href="https://www.jianshu.com/p/da50345f8076" target="_blank" rel="noopener">Theos制作越狱插件</a></li>
+<li><a href="http://iosre.com/t/theos-sdk/4788" target="_blank" rel="noopener">如何在Theos工程里嵌入第三方SDK或者静态库</a></li>
+<li><a href="http://iosre.com/t/tweak-framework/12891" target="_blank" rel="noopener">怎么在Tweak加入第三方framework(AFNetworking)</a></li>
+</ul>
+<h3 id="编译，打包，安装，即可在测试机上使用"><a href="#编译，打包，安装，即可在测试机上使用" class="headerlink" title="编译，打包，安装，即可在测试机上使用"></a>编译，打包，安装，即可在测试机上使用</h3><ul>
+<li>make系列命令</li>
+<li>alpine 这个好像是密码 连接调试的密码</li>
+</ul>
+<h3 id="注入，重签名即可在越狱手机以及非越狱手机使用"><a href="#注入，重签名即可在越狱手机以及非越狱手机使用" class="headerlink" title="注入，重签名即可在越狱手机以及非越狱手机使用"></a>注入，重签名即可在越狱手机以及非越狱手机使用</h3><h4 id="theos的Tweak创建的dylib怎么安装到非越狱机上详解"><a href="#theos的Tweak创建的dylib怎么安装到非越狱机上详解" class="headerlink" title="theos的Tweak创建的dylib怎么安装到非越狱机上详解"></a>theos的Tweak创建的dylib怎么安装到非越狱机上详解</h4><ul>
+<li><a href="https://www.jianshu.com/p/5aa62fb0061a" target="_blank" rel="noopener">theos的Tweak创建的dylib怎么安装到非越狱机上详解</a></li>
+<li><a href="https://www.jianshu.com/p/40d31abbed5e" target="_blank" rel="noopener">如何安装Tweak动态生成的.dylib文件</a></li>
+<li>删除多余的文件：_CodeSignature、 PlugIns、 Watch，以免注入失败</li>
+<li>重签名的时候 要删除.app文件中两个文件夹</li>
+</ul>
+<h4 id="用iReSign工具进行ipa重签名"><a href="#用iReSign工具进行ipa重签名" class="headerlink" title="用iReSign工具进行ipa重签名"></a>用iReSign工具进行ipa重签名</h4><ul>
+<li><a href="https://www.jianshu.com/p/6fe9eb030922" target="_blank" rel="noopener">iReSign重签名</a></li>
+</ul>
+<h4 id="MAC终端查看证书"><a href="#MAC终端查看证书" class="headerlink" title="MAC终端查看证书"></a>MAC终端查看证书</h4><ul>
+<li><a href="https://blog.csdn.net/elesos/article/details/73882942" target="_blank" rel="noopener">Mac Security工具使用总结find-identity</a></li>
+<li>security find-identity -v -p codesigning</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>嘘寒问暖，不如打笔巨款</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://upload-images.jianshu.io/upload_images/1914840-19962c4974a36405.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Carl_chen 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向/" rel="tag"># 逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/直播模块/" rel="next" title="直播模块">
+                <i class="fa fa-chevron-left"></i> 直播模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg"
+              alt="Carl_chen" />
+          
+            <p class="site-author-name" itemprop="name">Carl_chen</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#从APPStore下载的需要砸壳，这边直接省略掉这个步骤，从PP助手里面下载是直接脱壳的"><span class="nav-number">1.</span> <span class="nav-text">从APPStore下载的需要砸壳，这边直接省略掉这个步骤，从PP助手里面下载是直接脱壳的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#脱壳"><span class="nav-number">1.1.</span> <span class="nav-text">脱壳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#去掉-RESTRICT-section步骤-和-ptrace两个保护"><span class="nav-number">1.2.</span> <span class="nav-text">去掉__RESTRICT section步骤 和 ptrace两个保护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决去掉-RESTRICT-section-和-ptrace-闪退问题"><span class="nav-number">1.3.</span> <span class="nav-text">解决去掉 __RESTRICT section 和 ptrace 闪退问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取头文件，使用这个工具class-dump"><span class="nav-number">2.</span> <span class="nav-text">获取头文件，使用这个工具class-dump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态分析：连接手机使用cycript分析层级以及方法和属性"><span class="nav-number">3.</span> <span class="nav-text">静态分析：连接手机使用cycript分析层级以及方法和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用cycript命令去调试打印"><span class="nav-number">3.1.</span> <span class="nav-text">使用cycript命令去调试打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用THEOS自带的logify-pl生成对应类的全部方法调用和参数"><span class="nav-number">3.2.</span> <span class="nav-text">使用THEOS自带的logify.pl生成对应类的全部方法调用和参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分析：LLDB-debugserver，分析方法的调用以及参数"><span class="nav-number">4.</span> <span class="nav-text">动态分析：LLDB+debugserver，分析方法的调用以及参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Tweak，通过theos创建，在要实现功能的函数下编写程序即可"><span class="nav-number">5.</span> <span class="nav-text">创建Tweak，通过theos创建，在要实现功能的函数下编写程序即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译，打包，安装，即可在测试机上使用"><span class="nav-number">6.</span> <span class="nav-text">编译，打包，安装，即可在测试机上使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入，重签名即可在越狱手机以及非越狱手机使用"><span class="nav-number">7.</span> <span class="nav-text">注入，重签名即可在越狱手机以及非越狱手机使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#theos的Tweak创建的dylib怎么安装到非越狱机上详解"><span class="nav-number">7.1.</span> <span class="nav-text">theos的Tweak创建的dylib怎么安装到非越狱机上详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用iReSign工具进行ipa重签名"><span class="nav-number">7.2.</span> <span class="nav-text">用iReSign工具进行ipa重签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAC终端查看证书"><span class="nav-number">7.3.</span> <span class="nav-text">MAC终端查看证书</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Carl_chen</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共19.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=youyan_uid"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
