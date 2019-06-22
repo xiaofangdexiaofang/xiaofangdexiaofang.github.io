@@ -251,6 +251,212 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/直播模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Carl_chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="玮杭の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/22/直播模块/" itemprop="url">直播模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-22T12:47:35+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/直播/" itemprop="url" rel="index">
+                    <span itemprop="name">直播</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  755
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>目前在一家新零售的公司做直播模块，包括iOS和安卓。</p>
+<h3 id="直播推拉流技术"><a href="#直播推拉流技术" class="headerlink" title="直播推拉流技术"></a>直播推拉流技术</h3><p>####主播端</p>
+<p>1.音视频采集，使用的是AVFoundation</p>
+<p>2.视频处理，GPUImage美颜，水印等</p>
+<p>3.音视频编码压缩，包括软编码和硬编码</p>
+<p>4.推流，主要走协议（RTMP，HLS，FLV）</p>
+<p>####服务器端</p>
+<p>1.数据分发</p>
+<p>2.截屏</p>
+<p>3.录制</p>
+<p>4.转码等</p>
+<p>####用户端</p>
+<p>1.拉流（RTMP，HLS，FLV）</p>
+<p>2.解码</p>
+<p>3.播放</p>
+<p>我在开发的过程中，使用过LFLiveKit，AlivcLivePusher，TXLiteAVSDK_Smart 这三个推流SDK，播放器用的ijkplayer。<br>说实话技术上没啥难点，都是用别人的东西，看文档的时候认真点就行，这边说几个注意点吧。</p>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>1.阿里的美颜只有基础美颜不收费，腾讯的美颜都收费，没基础版本</p>
+<p>2.主播分享当前直播的H5链接的时候，需要跳转到其他APP，需要在切换前台和后台的方法继续和暂停当前的推流，以防止回到直播页面的时候，界面会卡住</p>
+<p>3.当切换APP的时候，可以给当前的推流设置一个图片，显示当前主播暂时离开</p>
+<p>4.因为是在RN中嵌入原生的模块，会导致内存暴涨，虽然没没弄清为何会这样，但是我这边做处理了，当在直播的时候，收到内存警告是，要清除当前的缓存</p>
+<p>5.当你推流的时候，发现使用其中某一个人的账号时每次都闪退，但是用其他人的都没问题，而且报错的原因是推流SDK内部发生错误，[AlivcLivePreview onConnectionLost]，那么基本上就是你这个人的推流地址被禁止了，只需要在阿里云的后台恢复下即可</p>
+<p>6.阿里推流的视频都可以被保存下来的，直接存储到OSS对象存储里面的，阿里云的直播管理系统配置下就行</p>
+<h3 id="直播聊天"><a href="#直播聊天" class="headerlink" title="直播聊天"></a>直播聊天</h3><p>聊天用的是融云的产品，主要就是直播聊天室<br>也没啥难点，就是看文档的时候认真点就行</p>
+<h4 id="注意点-1"><a href="#注意点-1" class="headerlink" title="注意点"></a>注意点</h4><p>在iOS的SDK中自己给自己发送消息是能接受到的，但是Andriod试了好多会都不行，提了个工单问下技术说可能被拦截了，所以接受不到消息</p>
+<h3 id="直播计费"><a href="#直播计费" class="headerlink" title="直播计费"></a>直播计费</h3><p>因为阿里官网没有具体的算法，所以自己大概计算了下</p>
+<p>假设目前是码率是800kbps,同时在线1000人的条件，直播一个小时</p>
+<p>需要的带宽 = 1000*0.8Mbps，大约800M带宽</p>
+<h4 id="按日峰值带宽"><a href="#按日峰值带宽" class="headerlink" title="按日峰值带宽"></a>按日峰值带宽</h4><p>按照当前这个区间段的价格一天的费用在800*0.638 = 510.4元</p>
+<h4 id="按照流量计算"><a href="#按照流量计算" class="headerlink" title="按照流量计算"></a>按照流量计算</h4><p>此处注意下，流量和带宽中间差了8倍</p>
+<p>流量 = 带宽*时间</p>
+<p>流量 = (800Mbps/8)*3600 = 360000MB =352GB</p>
+<p>按照这个区间段的价格一天的费用在352*0.264 = 93元</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/APP性能优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1854,185 +2060,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/18/GET和POST的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Carl_chen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0d338744ebf81a4cb127bd5adf2a6059252da608.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="玮杭の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/18/GET和POST的区别/" itemprop="url">GET和POST的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T11:15:59+08:00">
-                2017-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  447
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>日常开发中，后台写的接口中用的方法基本上都是GET和POST的方法并用，也有都是POST方法的（😂），那到底GET和POST有啥区别呢
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/18/GET和POST的区别/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2086,7 +2113,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2097,7 +2124,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2108,7 +2135,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2182,7 +2209,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共17.9k字</span>
+  <span class="post-count">博客全站共18.6k字</span>
 </div>
 
         
