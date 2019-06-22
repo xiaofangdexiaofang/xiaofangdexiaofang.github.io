@@ -77,7 +77,7 @@
 <meta property="og:site_name" content="玮杭の博客">
 <meta property="og:description" content="#卡顿优化这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T07:54:05.000Z">
+<meta property="og:updated_time" content="2018-06-04T08:05:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP性能优化">
 <meta name="twitter:description" content="#卡顿优化这段时间在优化项目的时候，发现有个页面tableView页面比较卡，然后针对这部分多了以下优化">
@@ -338,7 +338,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  943
+                  1,002
                 </span>
               
 
@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -404,6 +404,10 @@
 <li><p>我们项目中的个人中心页面包括许多数据，各个页面传递过来的，如果采用的通知的话，很麻烦。然后就做了每次进入页面刷新一遍。后来发现这样处理也有个问题，有的时候值跳转页面需要值，但是还没拿到就跳转，容易出问题，而且频繁请求，用户体验不好。然后，我们这边结合后台做了这样的处理：App端第一次请求接口，服务端返回成功，HTTP Status为200，并且在返回的Header中用Last-Modified表明服务器中该资源最后被修改的时间，App端第二次请求该接口，Header中传递本地缓存的Header中的Last-Modified,如果服务器端的资源并未发生变化，则会返回HTTP Status为304，我们直接可以使用本地的缓存，传输流量更少，相对而言，用户的等待时间会更短</p>
 </li>
 <li><p>当页面正在请求数据的时候，pop或者dis页面的时候，将网络请求cancel，减少用户流量</p>
+</li>
+<li><p>结合业务场景，设置多个请求的执行的先后顺序以及时间</p>
+</li>
+<li><p>监控当前的网络状态，当网络断连，提示用户，当网络重新连接，自动调起请求获取数据</p>
 </li>
 </ul>
 <p>#启动优化<br>先说结论，t(App总启动时间) = t1(main()之前的加载时间) + t2(main()之后的加载时间)。 t1 = 系统dylib(动态链接库)和自身App可执行文件的加载；<br>t2 = main方法执行之后到AppDelegate类中的- (BOOL)Application:(UIApplication <em>)Application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions方法执行结束前这段时间，主要是构建第一个界面，并完成渲染展示。</p>
@@ -610,7 +614,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -644,7 +648,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共17.8k字</span>
+  <span class="post-count">博客全站共17.9k字</span>
 </div>
 
         
